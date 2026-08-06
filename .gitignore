@@ -1,0 +1,19 @@
+# Configuration locale
+config/config.php
+
+# Fichiers temporaires
+*.log
+
+# Uploads utilisateurs
+public/uploads/
+
+# Cache
+cache/
+
+# IDE
+.vscode/
+.idea/
+
+# Système
+.DS_Store
+Thumbs.db

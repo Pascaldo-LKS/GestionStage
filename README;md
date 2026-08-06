@@ -1,0 +1,20 @@
+# GestionStage
+
+Application web de gestion des stages étudiants.
+
+## Technologies
+
+- PHP Natif
+- Architecture MVC
+- MySQL
+- HTML
+- CSS
+- JavaScript
+
+## Fonctionnalités
+
+- Gestion des étudiants
+- Gestion des entreprises
+- Gestion des stages
+- Gestion des rapports
+- Gestion des évaluations
