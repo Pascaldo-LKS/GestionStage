@@ -1,16 +1,12 @@
 <?php
-
 class Router
 {
-
     private function chargerController($nomController)
     {
         require_once __DIR__ . "/../controllers/" . $nomController . ".php";
 
         return new $nomController();
     }
-
-
     public function route()
     {
 
@@ -79,6 +75,56 @@ class Router
                 $controller->delete();
 
                 break;
+
+        case 'filiere/index':
+
+            $controller = $this->chargerController("FiliereController");
+
+            $controller->index();
+
+            break;
+
+
+        case 'filiere/create':
+
+            $controller = $this->chargerController("FiliereController");
+
+            $controller->create();
+
+            break;
+
+
+        case 'filiere/store':
+
+            $controller = $this->chargerController("FiliereController");
+
+            $controller->store();
+
+            break;
+
+        case 'filiere/edit':
+
+            $controller = $this->chargerController("FiliereController");
+
+            $controller->edit();
+
+            break;
+
+        case 'filiere/update':
+
+            $controller = $this->chargerController("FiliereController");
+
+            $controller->update();
+
+            break;
+
+        case 'filiere/delete':
+
+            $controller = $this->chargerController("FiliereController");
+
+            $controller->delete();
+
+            break;
             // PAGE INEXISTANTE
 
             default:
@@ -87,6 +133,7 @@ class Router
 
                 break;
         }
+
 
     }
 
