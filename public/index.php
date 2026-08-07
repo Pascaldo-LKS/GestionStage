@@ -1,10 +1,6 @@
 <?php
 
-echo "Bienvenue sur GestionStage";
+require_once __DIR__ . '/../app/core/Router.php';
+$router = new Router();
 
-
-require_once "../app/core/Database.php";
-
-$db = new Database();
-
-echo "Connexion réussie.";
+$router->route();
