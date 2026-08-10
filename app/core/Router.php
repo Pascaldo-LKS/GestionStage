@@ -211,7 +211,60 @@ class Router
 
                 $controller->delete();
 
-                break;    
+                break;  
+                
+            case 'encadreur/index':
+
+                $controller = $this->chargerController("EncadreurController");
+
+                $controller->index();
+
+                break;
+
+
+            case 'encadreur/create':
+
+                $controller = $this->chargerController("EncadreurController");
+
+                $controller->create();
+
+                break;
+
+
+            case 'encadreur/store':
+
+                $controller = $this->chargerController("EncadreurController");
+
+                $controller->store();
+
+                break;
+
+
+            case 'encadreur/edit':
+
+                $controller = $this->chargerController("EncadreurController");
+
+                $controller->edit();
+
+                break;
+
+
+            case 'encadreur/update':
+
+                $controller = $this->chargerController("EncadreurController");
+
+                $controller->update();
+
+                break;
+
+
+            case 'encadreur/delete':
+
+                $controller = $this->chargerController("EncadreurController");
+
+                $controller->delete();
+
+                break;
 
                 // PAGE INEXISTANTE
              default:

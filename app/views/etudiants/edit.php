@@ -14,44 +14,30 @@
 
 <h1>Modifier un étudiant</h1>
 
-
 <form method="POST" action="index.php?page=etudiant/update">
-
 
 <input type="hidden"
        name="id_etudiant"
        value="<?= $etudiant['id_etudiant']; ?>">
-
-
 <label>Nom :</label>
-
 <input type="text"
        name="nom"
        value="<?= $etudiant['nom']; ?>">
-
 <br><br>
 
-
 <label>Prénom :</label>
-
 <input type="text"
        name="prenom"
        value="<?= $etudiant['prenom']; ?>">
-
 <br><br>
 
-
 <label>Email :</label>
-
 <input type="email"
        name="email"
        value="<?= $etudiant['email']; ?>">
-
 <br><br>
 
-
 <label>Filière :</label>
-
 <select name="id_filiere">
 
     <?php foreach($filieres as $filiere): ?>
@@ -70,8 +56,6 @@
 </select>
 
 <br><br>
-
-
 <label>Niveau :</label>
 
 <select name="id_niveau">
