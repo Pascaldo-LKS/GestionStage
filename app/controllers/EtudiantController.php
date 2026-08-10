@@ -4,6 +4,7 @@ require_once __DIR__ . '/../models/Etudiant.php';
 require_once __DIR__ . '/../models/Filiere.php';
 require_once __DIR__ . '/../models/Niveau.php';
 require_once __DIR__ . '/../models/Annee.php';
+require_once __DIR__ . '/../models/Encadreur.php';
 
 
 class EtudiantController
@@ -21,40 +22,58 @@ class EtudiantController
         $filiereModel = new Filiere();
         $niveauModel = new Niveau();
         $anneeModel = new Annee();
+        $encadreurModel = new Encadreur();
 
         $filieres = $filiereModel->getAll();
         $niveaux = $niveauModel->getAll();
         $annees = $anneeModel->getAll();
+        $encadreurs =$encadreurModel->getAll();
 
         require_once __DIR__ . '/../views/etudiants/create.php';
     }
+
     public function store()
+{
+    if(
+        isset($_POST['nom']) &&
+        isset($_POST['prenom']) &&
+        isset($_POST['email']) &&
+        isset($_POST['id_filiere']) &&
+        isset($_POST['id_niveau']) &&
+        isset($_POST['id_annee'])
+    )
     {
-        if(
-            isset($_POST['nom']) &&
-            isset($_POST['prenom']) &&
-            isset($_POST['email']) &&
-            isset($_POST['id_filiere']) &&
-            isset($_POST['id_niveau']) &&
-            isset($_POST['id_annee'])
-        )
-        {
-            $nom = $_POST['nom'];
-            $prenom = $_POST['prenom'];
-            $email = $_POST['email'];
-            $id_filiere = $_POST['id_filiere'];
-            $id_niveau = $_POST['id_niveau'];
-            $id_annee = $_POST['id_annee'];
+        $nom = $_POST['nom'];
+        $prenom = $_POST['prenom'];
+        $email = $_POST['email'];
+        $id_filiere = $_POST['id_filiere'];
+        $id_niveau = $_POST['id_niveau'];
+        $id_annee = $_POST['id_annee'];
 
-            $model = new Etudiant();
+        $id_encadreur = !empty($_POST['id_encadreur'])
+            ? $_POST['id_encadreur']
+            : null;
 
-            $model->create( $nom, $prenom, $email, $id_filiere, $id_niveau, $id_annee );
 
-            header("Location: index.php?page=etudiant/index");
+        $model = new Etudiant();
 
-            exit;
-        }
+        $model->create(
+            $nom,
+            $prenom,
+            $email,
+            $id_filiere,
+            $id_niveau,
+            $id_annee,
+            $id_encadreur
+        );
+
+
+        header("Location: index.php?page=etudiant/index");
+
+        exit;
     }
+}
+    
 
     public function edit()
 {
@@ -67,10 +86,12 @@ class EtudiantController
         $filiereModel = new Filiere();
         $niveauModel = new Niveau();
         $anneeModel = new Annee();
+        $encadreurModel = new Encadreur();
 
         $filieres = $filiereModel->getAll();
         $niveaux = $niveauModel->getAll();
         $annees = $anneeModel->getAll();
+        $encadreurs =$encadreurModel->getAll();
 
 
         require_once __DIR__ . '/../views/etudiants/edit.php';
@@ -86,7 +107,7 @@ public function update()
         isset($_POST['email']) &&
         isset($_POST['id_filiere']) &&
         isset($_POST['id_niveau']) &&
-        isset($_POST['id_annee'])
+        isset($_POST['id_annee']) 
     )
     {
         $id = $_POST['id_etudiant'];
@@ -96,6 +117,10 @@ public function update()
         $id_filiere = $_POST['id_filiere'];
         $id_niveau = $_POST['id_niveau'];
         $id_annee = $_POST['id_annee'];
+        $id_encadreur = !empty($_POST['id_encadreur'])
+            ? $_POST['id_encadreur']
+            : null;
+
 
         $model = new Etudiant();
 
@@ -106,7 +131,8 @@ public function update()
             $email,
             $id_filiere,
             $id_niveau,
-            $id_annee
+            $id_annee,
+            $id_encadreur
         );
         header("Location: index.php?page=etudiant/index");
 

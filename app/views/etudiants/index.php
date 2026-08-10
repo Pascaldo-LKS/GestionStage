@@ -17,13 +17,14 @@
 
 <br><br>
 
-<table border="1">
+<table border="3">
 
     <tr>
         <th>ID</th>
         <th>Nom</th>
         <th>Prénom</th>
         <th>Email</th>
+        <th>Encadreur</th>
         <th>Filière</th>
         <th>Niveau</th>
         <th>Année académique</th>
@@ -39,6 +40,8 @@
         <td>   <?= $etudiant['prenom']; ?> </td>
 
         <td>     <?= $etudiant['email']; ?> </td>
+
+        <td>   <?= $etudiant['nom']." ". $etudiant['prenom'] ;  ?> 
 
         <td>   <?= $etudiant['nom_filiere']; ?> </td>
 

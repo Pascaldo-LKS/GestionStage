@@ -266,6 +266,112 @@ class Router
 
                 break;
 
+            case 'stage/index':
+
+                $controller = $this->chargerController("StageController");
+
+                $controller->index();
+
+                break;
+
+
+            case 'stage/create':
+
+                $controller = $this->chargerController("StageController");
+
+                $controller->create();
+
+                break;
+
+
+            case 'stage/store':
+
+                $controller = $this->chargerController("StageController");
+
+                $controller->store();
+
+                break;
+
+
+            case 'stage/edit':
+
+                $controller = $this->chargerController("StageController");
+
+                $controller->edit();
+
+                break;
+
+
+            case 'stage/update':
+
+                $controller = $this->chargerController("StageController");
+
+                $controller->update();
+
+                break;
+
+
+            case 'stage/delete':
+
+                $controller = $this->chargerController("StageController");
+
+                $controller->delete();
+
+                break;
+
+            case 'rapport/index':
+
+                $controller = $this->chargerController("RapportController");
+
+                $controller->index();
+
+                break;
+
+
+            case 'rapport/create':
+
+                $controller = $this->chargerController("RapportController");
+
+                $controller->create();
+
+                break;
+
+
+            case 'rapport/store':
+
+                $controller = $this->chargerController("RapportController");
+
+                $controller->store();
+
+                break;
+
+
+            case 'rapport/edit':
+
+                $controller = $this->chargerController("RapportController");
+
+                $controller->edit();
+
+                break;
+
+
+            case 'rapport/update':
+
+                $controller = $this->chargerController("RapportController");
+
+                $controller->update();
+
+                break;
+
+
+            case 'rapport/delete':
+
+                $controller = $this->chargerController("RapportController");
+
+                $controller->delete();
+
+                break;
+
                 // PAGE INEXISTANTE
              default:
                    echo "<h2>404 - Page introuvable</h2>";

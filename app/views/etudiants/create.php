@@ -8,6 +8,7 @@
 /** @var array $filieres */
 /** @var array $niveaux */
 /** @var array $annees */
+/** @var array $encadreurs */
 ?>
 <body>
 
@@ -87,6 +88,30 @@
 
     <br><br>
 
+<div id="encadreurDiv" style="display: none;">
+
+    <label>Encadreur :</label>
+
+    <select name="id_encadreur">
+
+        <option value=""> Choisir un encadreur </option>
+
+        <?php foreach($encadreurs as $encadreur): ?>
+
+            <option value="<?= $encadreur['id_encadreur']; ?>">
+                <?= $encadreur['nom'] . ' ' . $encadreur['prenom']; ?>
+            </option>
+
+        <?php endforeach; ?>
+
+    </select>
+
+    <br><br>
+
+</div>
+
+<br><br>
+
     <button type="submit">
         Enregistrer
     </button>
@@ -98,6 +123,30 @@
 <a href="index.php?page=etudiant/index">
     Retour à la liste
 </a>
+
+<script>
+
+function afficherEncadreur()
+{
+    let niveau = document.querySelector('select[name="id_niveau"]');
+
+    let encadreurDiv = document.getElementById('encadreurDiv');
+
+    if(niveau.options[niveau.selectedIndex].text === "Licence 3")
+    {
+        encadreurDiv.style.display = "block";
+    }
+    else
+    {
+        encadreurDiv.style.display = "none";
+    }
+}
+
+
+document.querySelector('select[name="id_niveau"]')
+    .addEventListener('change', afficherEncadreur);
+
+</script>
 
 </body>
 

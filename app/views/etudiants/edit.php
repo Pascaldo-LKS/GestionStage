@@ -9,6 +9,7 @@
 /** @var array $niveaux */
 /** @var array $annees */
 /** @var array $etudiant*/
+/** @var array $encadreurs */
 ?>
 <body>
 
@@ -77,7 +78,6 @@
 
 <br><br>
 
-
 <label>Année académique :</label>
 
 <select name="id_annee">
@@ -99,6 +99,52 @@
 
 <br><br>
 
+<br><br>
+
+<label>Année académique :</label>
+
+<select name="id_encadreur">
+
+    <?php foreach($annees as $annee): ?>
+
+        <option
+            value="<?= $annee['id_annee']; ?>"
+            <?= $annee['id_annee'] == $etudiant['id_annee'] ? 'selected' : ''; ?>
+        >
+
+            <?= $annee['libelle']; ?>
+
+        </option>
+
+    <?php endforeach; ?>
+
+</select>
+<br><br>
+<div id="encadreurDiv" style="display: none;">
+    <label>Encadreur :</label>
+
+    <select name="id_encadreur">
+
+        <option value=""> Aucun encadreur </option>
+
+    <?php foreach($encadreurs as $encadreur): ?>
+
+        <option
+            value="<?= $encadreur['id_encadreur']; ?>"
+            <?= $encadreur['id_encadreur'] == $etudiant['id_encadreur'] ? 'selected' : ''; ?>
+        >
+
+            <?= $encadreur['nom'] . ' ' . $encadreur['prenom']; ?>
+
+        </option>
+
+    <?php endforeach; ?>
+
+    </select>
+</div>
+
+<br><br>
+
 
 <button type="submit">
     Modifier
@@ -114,7 +160,30 @@
     Retour à la liste
 </a>
 
+<script>
 
+function afficherEncadreur()
+{
+    let niveau = document.querySelector('select[name="id_niveau"]');
+
+    let encadreurDiv = document.getElementById('encadreurDiv');
+
+    if(niveau.options[niveau.selectedIndex].text === "Licence 3")
+    {
+        encadreurDiv.style.display = "block";
+    }
+    else
+    {
+        encadreurDiv.style.display = "none";
+    }
+}
+
+document.querySelector('select[name="id_niveau"]')
+    .addEventListener('change', afficherEncadreur);
+
+afficherEncadreur();
+
+</script>
 </body>
 
 </html>

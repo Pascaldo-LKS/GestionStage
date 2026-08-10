@@ -6,7 +6,7 @@ class Etudiant extends Model
 {
     public function getAll()
     {
-        $sql = "SELECT  e.id_etudiant, e.nom, e.prenom, e.email, f.nom_filiere, n.nom_niveau, a.libelle
+        $sql = "SELECT  e.id_etudiant, e.nom, e.prenom, e.email, f.nom_filiere, n.nom_niveau, a.libelle, d.nom
 
                 FROM etudiant e
 
@@ -14,7 +14,9 @@ class Etudiant extends Model
 
                 INNER JOIN niveau n ON e.id_niveau = n.id_niveau
 
-                INNER JOIN annee_academique a ON e.id_annee = a.id_annee";
+                INNER JOIN annee_academique a ON e.id_annee = a.id_annee
+
+                INNER JOIN encadreur d ON e.id_encadreur = d.id_encadreur";
 
         $stmt = $this->conn->query($sql);
 
@@ -22,15 +24,15 @@ class Etudiant extends Model
     }
 
 
-   public function create($nom, $prenom, $email, $id_filiere, $id_niveau, $id_annee)
+   public function create($nom, $prenom, $email, $id_filiere, $id_niveau, $id_annee,  $id_encadreur)
 {
     $sql = "INSERT INTO etudiant
-            (nom, prenom, email, id_filiere,id_niveau, id_annee )
-            VALUES (?, ?, ?, ?, ?, ?)";
+            (nom, prenom, email, id_filiere,id_niveau, id_annee,  id_encadreur)
+            VALUES (?, ?, ?, ?, ?, ?, ?)";
 
     $stmt = $this->conn->prepare($sql);
 
-    return $stmt->execute([ $nom, $prenom, $email, $id_filiere, $id_niveau, $id_annee ]);
+    return $stmt->execute([ $nom, $prenom, $email, $id_filiere, $id_niveau, $id_annee, $id_encadreur ]);
 }
 
 public function getById($id)
@@ -44,7 +46,16 @@ public function getById($id)
 
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
-public function update( $id, $nom, $prenom, $email, $id_filiere, $id_niveau, $id_annee)
+public function update(
+    $id,
+    $nom,
+    $prenom,
+    $email,
+    $id_filiere,
+    $id_niveau,
+    $id_annee,
+    $id_encadreur
+)
 {
     $sql = "UPDATE etudiant
             SET nom = ?,
@@ -52,12 +63,22 @@ public function update( $id, $nom, $prenom, $email, $id_filiere, $id_niveau, $id
                 email = ?,
                 id_filiere = ?,
                 id_niveau = ?,
-                id_annee = ?
+                id_annee = ?,
+                id_encadreur = ?
             WHERE id_etudiant = ?";
 
     $stmt = $this->conn->prepare($sql);
 
-    return $stmt->execute([ $nom, $prenom, $email, $id_filiere, $id_niveau, $id_annee, $id ]);
+    return $stmt->execute([
+        $nom,
+        $prenom,
+        $email,
+        $id_filiere,
+        $id_niveau,
+        $id_annee,
+        $id_encadreur,
+        $id
+    ]);
 }
 
 public function delete($id)
