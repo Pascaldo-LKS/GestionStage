@@ -88,9 +88,7 @@ class Router
 
                 $controller = $this->chargerController("FiliereController");
                 $controller->delete();
-                break;
-
-            
+                break;            
 
             case 'niveau/index':
 
@@ -161,6 +159,59 @@ class Router
                 $controller = $this->chargerController("AnneeController");
                 $controller->delete();
                 break;
+
+            case 'entreprise/index':
+
+                $controller = $this->chargerController("EntrepriseController");
+
+                $controller->index();
+
+                break;
+
+
+            case 'entreprise/create':
+
+                $controller = $this->chargerController("EntrepriseController");
+
+                $controller->create();
+
+                break;
+
+
+            case 'entreprise/store':
+
+                $controller = $this->chargerController("EntrepriseController");
+
+                $controller->store();
+
+                break;
+
+
+            case 'entreprise/edit':
+
+                $controller = $this->chargerController("EntrepriseController");
+
+                $controller->edit();
+
+                break;
+
+
+            case 'entreprise/update':
+
+                $controller = $this->chargerController("EntrepriseController");
+
+                $controller->update();
+
+                break;
+
+
+            case 'entreprise/delete':
+
+                $controller = $this->chargerController("EntrepriseController");
+
+                $controller->delete();
+
+                break;    
 
                 // PAGE INEXISTANTE
              default:

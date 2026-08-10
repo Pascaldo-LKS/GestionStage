@@ -1,32 +1,62 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Liste etudiants</title>
-    </head>
-    <?php
+
+<head>
+    <title>Liste des étudiants</title>
+</head>
+<?php
 /** @var array $etudiants */
 ?>
-    <body>
-        <h1>Liste des etudiants en stage</h1>
-        <a href="index.php?page=etudiant/create"><button>Ajouter un etudiant</button></a>
-        <br><br>
+<body>
 
-        <table border="2">
-            <tr>
-                <th>N°</th> 
-                <th>Nom</th>
-                <th>Prenom</th>
-                <th>Email</th>
-                <th>Filiere</th>
-                <th>Niveau</th>
-                <th>Annee academique </th>
-            </tr>
-            <?php foreach($etudiants as $etudiants): ?> 
-                <tr>
-                    <td><?= $etudiants['id_etudiant']; ?></td>
-                    <td><?= $etudiants['nom']; ?></td>
-                </tr>  
-            <?php endforeach; ?>
-        </table>
-    </body>
+<h1>Liste des étudiants</h1>
+
+<a href="index.php?page=etudiant/create">
+    Ajouter un étudiant
+</a>
+
+<br><br>
+
+<table border="1">
+
+    <tr>
+        <th>ID</th>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Email</th>
+        <th>Filière</th>
+        <th>Niveau</th>
+        <th>Année académique</th>
+        <th>Action</th>
+    </tr>
+
+    <?php foreach($etudiants as $etudiant): ?>
+    <tr>
+        <td> <?= $etudiant['id_etudiant']; ?> </td>
+
+        <td>   <?= $etudiant['nom']; ?></td>
+
+        <td>   <?= $etudiant['prenom']; ?> </td>
+
+        <td>     <?= $etudiant['email']; ?> </td>
+
+        <td>   <?= $etudiant['nom_filiere']; ?> </td>
+
+        <td>    <?= $etudiant['nom_niveau']; ?> </td>
+
+        <td>    <?= $etudiant['libelle']; ?></td>
+
+        <td>
+            <a href="index.php?page=etudiant/edit&id=<?= $etudiant['id_etudiant']; ?>">   Modifier</a>
+
+             <a href="index.php?page=etudiant/delete&id=<?= $etudiant['id_etudiant']; ?>"
+            onclick="return confirm('Voulez-vous supprimer cet étudiant ?');"> Supprimer</a>
+        </td>
+    </tr>
+     <?php endforeach; ?>
+
+</table>
+
+</body>
+
 </html>
