@@ -1,10 +1,10 @@
 <?php
 require_once __DIR__ . '/../core/Model.php';
-class Filiere extends Model
+class Niveau extends Model
 {
     public function getAll()
     {
-        $sql = "SELECT * FROM filiere";
+        $sql = "SELECT * FROM niveau";
 
         $stmt = $this->conn->query($sql);
 
@@ -13,7 +13,7 @@ class Filiere extends Model
 
     public function create($nom)
     {
-        $sql = "INSERT INTO filiere(nom_filiere)
+        $sql = "INSERT INTO niveau(nom_niveau)
                 VALUES(?)";
 
         $stmt = $this->conn->prepare($sql);
@@ -23,7 +23,7 @@ class Filiere extends Model
 
     public function getById($id)
 {
-    $sql = "SELECT * FROM filiere WHERE id_filiere = ?";
+    $sql = "SELECT * FROM niveau WHERE id_niveau = ?";
 
     $stmt = $this->conn->prepare($sql);
 
@@ -34,9 +34,9 @@ class Filiere extends Model
 
     public function update($id, $nom)
     {
-        $sql = "UPDATE filiere 
-                SET nom_filiere = ?
-                WHERE id_filiere = ?";
+        $sql = "UPDATE niveau
+                SET nom_niveau = ?
+                WHERE id_niveau = ?";
 
 
         $stmt = $this->conn->prepare($sql);
@@ -50,7 +50,7 @@ class Filiere extends Model
 
     public function delete($id)
 {
-    $sql = "DELETE FROM filiere WHERE id_filiere = ?";
+    $sql = "DELETE FROM niveau WHERE id_niveau = ?";
 
     $stmt = $this->conn->prepare($sql);
 

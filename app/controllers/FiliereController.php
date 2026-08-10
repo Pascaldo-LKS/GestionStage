@@ -70,4 +70,21 @@ class FiliereController
         }
     }
 
+    public function delete()
+{
+    if(isset($_GET['id']))
+    {
+        $id = $_GET['id'];
+
+        $model = new Filiere();
+
+        $model->delete($id);
+
+
+        header("Location: index.php?page=filiere/index");
+
+        exit;
+    }
+}
+
 }
