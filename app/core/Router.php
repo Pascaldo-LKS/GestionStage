@@ -372,6 +372,155 @@ class Router
 
                 break;
 
+            case 'utilisateur/index':
+
+                $controller = $this->chargerController("UtilisateurController");
+
+                $controller->index();
+
+                break;
+
+
+            case 'utilisateur/create':
+
+                $controller = $this->chargerController("UtilisateurController");
+
+                $controller->create();
+
+                break;
+
+
+            case 'utilisateur/store':
+
+                $controller = $this->chargerController("UtilisateurController");
+
+                $controller->store();
+
+                break;
+
+
+            case 'utilisateur/edit':
+
+                $controller = $this->chargerController("UtilisateurController");
+
+                $controller->edit();
+
+                break;
+
+
+            case 'utilisateur/update':
+
+                $controller = $this->chargerController("UtilisateurController");
+
+                $controller->update();
+
+                break;
+
+
+            case 'utilisateur/delete':
+
+                $controller = $this->chargerController("UtilisateurController");
+
+                $controller->delete();
+
+                break;
+
+           // case 'auth/login':
+
+          //      $controller = $this->chargerController("AuthController");
+
+           //     $controller->login();
+
+           //     break;
+
+
+            case 'auth/authenticate':
+
+                $controller = $this->chargerController("AuthController");
+
+                $controller->authenticate();
+
+                break;
+
+
+            case 'auth/logout':
+
+                $controller = $this->chargerController("AuthController");
+
+                $controller->logout();
+
+                break;
+
+             case 'rapport/validate':
+
+                $controller = $this->chargerController("RapportController");
+
+                $controller->validate();
+
+                break;
+
+
+            case 'rapport/refuse':
+
+                $controller = $this->chargerController("RapportController");
+
+                $controller->refuse();
+
+                break;
+
+                            // ==========================
+            // AUTHENTIFICATION
+            // ==========================
+
+            // Connexion étudiant
+            case 'auth/etudiant-login':
+
+                $controller = $this->chargerController("AuthController");
+
+                $controller->loginEtudiant();
+
+                break;
+
+
+            // Authentification étudiant
+            case 'auth/authenticate-etudiant':
+
+                $controller = $this->chargerController("AuthController");
+
+                $controller->authenticateEtudiant();
+
+                break;
+
+
+            // Connexion administrateur
+            case 'auth/admin-login':
+
+                $controller = $this->chargerController("AuthController");
+
+                $controller->loginAdmin();
+
+                break;
+
+
+            // Authentification administrateur
+            case 'auth/authenticate-admin':
+
+                $controller = $this->chargerController("AuthController");
+
+                $controller->authenticateAdmin();
+
+                break;
+
+
+            // Déconnexion
+            case 'auth/logout':
+
+                $controller = $this->chargerController("AuthController");
+
+                $controller->logout();
+
+                break;
+
                 // PAGE INEXISTANTE
              default:
                    echo "<h2>404 - Page introuvable</h2>";

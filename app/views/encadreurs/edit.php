@@ -21,15 +21,15 @@
     <label>Nom :</label>
 
     <input type="text"
-           name="nom"
-           value="<?= $encadreur['nom']; ?>">
+           name="nom_encadreur"
+           value="<?= $encadreur['nom_encadreur']; ?>">
 
     <br><br>
 
 
     <label>Prénom :</label>
 
-    <input type="text" name="prenom" value="<?= $encadreur['prenom']; ?>">
+    <input type="text" name="prenom_encadreur" value="<?= $encadreur['prenom_encadreur']; ?>">
 
     <br><br>
 

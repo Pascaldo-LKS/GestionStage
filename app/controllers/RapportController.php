@@ -2,6 +2,7 @@
 
 require_once __DIR__ . '/../models/Rapport.php';
 require_once __DIR__ . '/../models/Stage.php';
+require_once __DIR__ . '/../config/auth.php';
 
 
 class RapportController
@@ -18,80 +19,89 @@ class RapportController
 
 
     public function create()
-    {
+{
+    requireEtudiant();
+
+    $id_etudiant = $_SESSION['id_etudiant'];
+
+    $stageModel = new Stage();
+
+    $stage = $stageModel->getStageEnCours($id_etudiant);
+
+    if (!$stage) {
+        echo "Vous n'avez aucun stage en cours.";
+        exit;
+    }
+
+    require_once __DIR__ . '/../views/rapports/create.php';
+}
+
+   public function store()
+{
+    requireEtudiant();
+
+    if (isset($_FILES['fichier'])) {
+
+        $id_etudiant = $_SESSION['id_etudiant'];
+
         $stageModel = new Stage();
 
-        $stages = $stageModel->getAll();
+        $stage = $stageModel->getStageEnCours($id_etudiant);
 
-        require_once __DIR__ . '/../views/rapports/create.php';
-    }
-
-
-    public function store()
-    {
-        if(
-            isset($_FILES['fichier']) &&
-            isset($_POST['id_stage'])
-        )
-        {
-            $fichier = $_FILES['fichier'];
-            $id_stage = $_POST['id_stage'];
-
-
-            // Vérifier que c'est un PDF
-            if($fichier['type'] != 'application/pdf')
-            {
-                die("Veuillez sélectionner un fichier PDF.");
-            }
-
-
-            // Dossier de stockage
-            $dossier = __DIR__ . '/../../public/uploads/rapports/';
-
-
-            // Créer le dossier s'il n'existe pas
-            if(!is_dir($dossier))
-            {
-                mkdir($dossier, 0777, true);
-            }
-
-
-            // Nom du fichier
-            $nomFichier = time() . '_' . $fichier['name'];
-
-
-            // Déplacer le fichier
-            move_uploaded_file(
-                $fichier['tmp_name'],
-                $dossier . $nomFichier
-            );
-
-
-            // Date actuelle
-            $date_depot = date('Y-m-d');
-
-
-            // Statut par défaut
-            $statut_validation = 'En attente';
-
-
-            // Enregistrer dans la base
-            $model = new Rapport();
-
-            $model->create(
-                $nomFichier,
-                $date_depot,
-                $statut_validation,
-                $id_stage
-            );
-
-
-            header("Location: index.php?page=rapport/index");
-
+        if (!$stage) {
+            echo "Vous n'avez aucun stage en cours.";
             exit;
         }
-    }
 
+        $id_stage = $stage['id_stage'];
+
+        $fichier = $_FILES['fichier'];
+
+        if ($fichier['error'] !== UPLOAD_ERR_OK) {
+            echo "Erreur lors de l'envoi du fichier.";
+            exit;
+        }
+
+        $extension = strtolower(
+            pathinfo($fichier['name'], PATHINFO_EXTENSION)
+        );
+
+        if ($extension !== 'pdf') {
+            echo "Seuls les fichiers PDF sont acceptés.";
+            exit;
+        }
+
+        $nom_fichier = time() . '_' . basename($fichier['name']);
+
+        $dossier = __DIR__ . '/../../public/uploads/rapports/';
+
+        if (!is_dir($dossier)) {
+            mkdir($dossier, 0777, true);
+        }
+
+        move_uploaded_file(
+            $fichier['tmp_name'],
+            $dossier . $nom_fichier
+        );
+
+        $date_depot = date('Y-m-d');
+
+        $statut_validation = 'En attente';
+
+        $model = new Rapport();
+
+        $model->create(
+            $nom_fichier,
+            $date_depot,
+            $statut_validation,
+            $id_stage
+        );
+
+        header("Location: index.php?page=rapport/index");
+
+        exit;
+    }
+}
 
     public function edit()
     {
@@ -200,5 +210,41 @@ class RapportController
             exit;
         }
     }
+
+    public function validate()
+{
+    requireAdmin();
+
+    if(isset($_GET['id']))
+    {
+        $id = $_GET['id'];
+
+        $model = new Rapport();
+
+        $model->updateStatut($id, 'Valide');
+
+        header("Location: index.php?page=rapport/index");
+
+        exit;
+    }
+}
+
+public function refuse()
+{
+    requireAdmin();
+
+    if(isset($_GET['id']))
+    {
+        $id = $_GET['id'];
+
+        $model = new Rapport();
+
+        $model->updateStatut($id, 'Refuse');
+
+        header("Location: index.php?page=rapport/index");
+
+        exit;
+    }
+}
 
 }

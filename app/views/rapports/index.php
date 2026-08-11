@@ -65,6 +65,20 @@
                onclick="return confirm('Voulez-vous supprimer ce rapport ?');">
                 Supprimer
             </a>
+            |
+            <?php if($rapport['statut_validation'] == 'En attente'): ?>
+
+            <a href="index.php?page=rapport/validate&id=<?= $rapport['id_rapport']; ?>">
+                Valider
+            </a>
+
+            |
+
+            <a href="index.php?page=rapport/refuse&id=<?= $rapport['id_rapport']; ?>">
+                Refuser
+            </a>
+
+<?php endif; ?>
 
         </td>
 

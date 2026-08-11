@@ -6,7 +6,7 @@ class Etudiant extends Model
 {
     public function getAll()
     {
-        $sql = "SELECT  e.id_etudiant, e.nom, e.prenom, e.email, f.nom_filiere, n.nom_niveau, a.libelle, d.nom
+        $sql = "SELECT  e.id_etudiant, e.nom, e.prenom, e.email, f.nom_filiere, n.nom_niveau, a.libelle, d.nom_encadreur , d.prenom_encadreur
 
                 FROM etudiant e
 

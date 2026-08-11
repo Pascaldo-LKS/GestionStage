@@ -23,15 +23,15 @@ class EncadreurController
     public function store()
     {
         if(
-            isset($_POST['nom']) &&
-            isset($_POST['prenom']) &&
+            isset($_POST['nom_encadreur']) &&
+            isset($_POST['prenom_encadreur']) &&
             isset($_POST['email']) &&
             isset($_POST['telephone']) &&
             isset($_POST['fonction'])
         )
         {
-            $nom = $_POST['nom'];
-            $prenom = $_POST['prenom'];
+            $nom = $_POST['nom_encadreur'];
+            $prenom = $_POST['prenom_encadreur'];
             $email = $_POST['email'];
             $telephone = $_POST['telephone'];
             $fonction = $_POST['fonction'];
@@ -72,16 +72,16 @@ class EncadreurController
     {
         if(
             isset($_POST['id_encadreur']) &&
-            isset($_POST['nom']) &&
-            isset($_POST['prenom']) &&
+            isset($_POST['nom_encadreur']) &&
+            isset($_POST['prenom_encadreur']) &&
             isset($_POST['email']) &&
             isset($_POST['telephone']) &&
             isset($_POST['fonction'])
         )
         {
             $id = $_POST['id_encadreur'];
-            $nom = $_POST['nom'];
-            $prenom = $_POST['prenom'];
+            $nom = $_POST['nom_encadreur'];
+            $prenom = $_POST['prenom_encadreur'];
             $email = $_POST['email'];
             $telephone = $_POST['telephone'];
             $fonction = $_POST['fonction'];

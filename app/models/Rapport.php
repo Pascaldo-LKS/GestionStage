@@ -93,4 +93,18 @@ class Rapport extends Model
         return $stmt->execute([$id]);
     }
 
+    public function updateStatut($id, $statut)
+{
+    $sql = "UPDATE rapport
+            SET statut_validation = ?
+            WHERE id_rapport = ?";
+
+    $stmt = $this->conn->prepare($sql);
+
+    return $stmt->execute([
+        $statut,
+        $id
+    ]);
+}
+
 }

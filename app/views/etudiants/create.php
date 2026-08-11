@@ -99,7 +99,7 @@
         <?php foreach($encadreurs as $encadreur): ?>
 
             <option value="<?= $encadreur['id_encadreur']; ?>">
-                <?= $encadreur['nom'] . ' ' . $encadreur['prenom']; ?>
+                <?= $encadreur['nom_encadreur'] . ' ' . $encadreur['prenom_encadreur']; ?>
             </option>
 
         <?php endforeach; ?>

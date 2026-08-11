@@ -6,6 +6,7 @@
 </head>
 <?php /** @var array $encadreurs */ ?>
 <body>
+    
 
 <h1>Liste des encadreurs</h1>
 
@@ -36,8 +37,8 @@
             <?= $encadreur['id_encadreur']; ?>
         </td>
 
-        <td><?= $encadreur['nom']; ?></td>
-        <td><?= $encadreur['prenom']; ?></td>
+        <td><?= $encadreur['nom_encadreur']; ?></td>
+        <td><?= $encadreur['prenom_encadreur']; ?></td>
         <td><?= $encadreur['email']; ?></td>
         <td> <?= $encadreur['telephone']; ?></td>
         <td><?= $encadreur['fonction']; ?></td>

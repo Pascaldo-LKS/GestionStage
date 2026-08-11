@@ -134,7 +134,7 @@
             <?= $encadreur['id_encadreur'] == $etudiant['id_encadreur'] ? 'selected' : ''; ?>
         >
 
-            <?= $encadreur['nom'] . ' ' . $encadreur['prenom']; ?>
+            <?= $encadreur['nom_encadreur'] . ' ' . $encadreur['prenom_encadreur']; ?>
 
         </option>
 

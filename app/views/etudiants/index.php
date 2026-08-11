@@ -41,7 +41,7 @@
 
         <td>     <?= $etudiant['email']; ?> </td>
 
-        <td>   <?= $etudiant['nom']." ". $etudiant['prenom'] ;  ?> 
+        <td>   <?= $etudiant['nom_encadreur'] . ' ' . $etudiant['prenom_encadreur'] ;  ?> </td>
 
         <td>   <?= $etudiant['nom_filiere']; ?> </td>
 

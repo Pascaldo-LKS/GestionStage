@@ -10,14 +10,14 @@ class Stage extends Model
 {
     $sql = "SELECT
                 stage.*,
-                etudiant.nom AS nom_etudiant,
-                etudiant.prenom AS prenom_etudiant,
-                entreprise.nom_entreprise
+                e.nom AS nom_etudiant,
+                e.prenom AS prenom_etudiant,
+                en.nom_entreprise
             FROM stage
-            INNER JOIN etudiant
-                ON stage.id_etudiant = etudiant.id_etudiant
-            INNER JOIN entreprise
-                ON stage.id_entreprise = entreprise.id_entreprise";
+            INNER JOIN etudiant e
+                ON stage.id_etudiant = e.id_etudiant
+            INNER JOIN entreprise en
+                ON stage.id_entreprise = en.id_entreprise";
 
     $stmt = $this->conn->query($sql);
 
@@ -54,6 +54,19 @@ class Stage extends Model
         ]);
     }
 
+    public function getStageEnCours($id_etudiant)
+{
+    $sql = "SELECT * FROM stage
+            WHERE id_etudiant = ?
+            AND statut = 'En cours'
+            LIMIT 1";
+
+    $stmt = $this->conn->prepare($sql);
+
+    $stmt->execute([$id_etudiant]);
+
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
 
     public function getById($id)
     {

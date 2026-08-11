@@ -13,13 +13,13 @@
 
     <label>Nom :</label>
 
-    <input type="text" name="nom">
+    <input type="text" name="nom_encadreur">
 
     <br><br>
 
     <label>Prénom :</label>
 
-    <input type="text" name="prenom">
+    <input type="text" name="prenom_encadreur">
 
     <br><br>
 

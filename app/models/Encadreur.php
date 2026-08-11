@@ -16,7 +16,7 @@ class Encadreur extends Model
     public function create( $nom, $prenom, $email, $telephone, $fonction)
     {
         $sql = "INSERT INTO encadreur
-                (nom, prenom, email, telephone, fonction )
+                (nom_encadreur, prenom_encadreur, email, telephone, fonction )
                 VALUES (?, ?, ?, ?, ?)";
 
         $stmt = $this->conn->prepare($sql);
@@ -43,8 +43,8 @@ class Encadreur extends Model
     )
     {
         $sql = "UPDATE encadreur
-                SET nom = ?,
-                    prenom = ?,
+                SET nom_encadreur = ?,
+                    prenom_encadreur = ?,
                     email = ?,
                     telephone = ?,
                     fonction = ?
