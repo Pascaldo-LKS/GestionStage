@@ -1,59 +1,167 @@
-<!DOCTYPE html>
-<html>
+<?php
 
-<head>
-    <title>Ajouter un encadreur</title>
-</head>
+$title = "Ajouter un encadreur";
 
-<body>
+require_once __DIR__ . '/../layouts/header.php';
 
-<h1>Ajouter un encadreur</h1>
+require_once __DIR__ . '/../layouts/menu-admin.php';
 
-<form method="POST" action="index.php?page=encadreur/store">
+?>
 
-    <label>Nom :</label>
+<div class="page-content">
 
-    <input type="text" name="nom_encadreur">
+```
+<div class="page-header">
 
-    <br><br>
+    <div>
 
-    <label>Prénom :</label>
+        <h1>Ajouter un encadreur</h1>
 
-    <input type="text" name="prenom_encadreur">
+        <p>
+            Enregistrer un nouvel encadreur.
+        </p>
 
-    <br><br>
-
-    <label>Email :</label>
-
-    <input type="email" name="email">
-
-    <br><br>
-
-    <label>Téléphone :</label>
-
-    <input type="text" name="telephone">
-
-    <br><br>
-
-    <label>Fonction :</label>
-
-    <input type="text" name="fonction">
-
-    <br><br>
-
-    <button type="submit">
-        Enregistrer
-    </button>
-
-</form>
+    </div>
 
 
-<br>
+    <a
+        href="index.php?page=encadreur/index"
+        class="btn btn-secondary"
+    >
+        ← Retour
+    </a>
 
-<a href="index.php?page=encadreur/index">
-    Retour à la liste
-</a>
+</div>
 
-</body>
 
-</html>
+<div class="form-card">
+
+    <form
+        method="POST"
+        action="index.php?page=encadreur/store"
+    >
+
+
+        <!-- NOM -->
+
+        <div class="form-group">
+
+            <label for="nom_encadreur">
+                Nom :
+            </label>
+
+            <input
+                type="text"
+                id="nom_encadreur"
+                name="nom_encadreur"
+                required
+            >
+
+        </div>
+
+
+        <!-- PRÉNOM -->
+
+        <div class="form-group">
+
+            <label for="prenom_encadreur">
+                Prénom :
+            </label>
+
+            <input
+                type="text"
+                id="prenom_encadreur"
+                name="prenom_encadreur"
+                required
+            >
+
+        </div>
+
+
+        <!-- EMAIL -->
+
+        <div class="form-group">
+
+            <label for="email">
+                Email :
+            </label>
+
+            <input
+                type="email"
+                id="email"
+                name="email"
+                required
+            >
+
+        </div>
+
+
+        <!-- TÉLÉPHONE -->
+
+        <div class="form-group">
+
+            <label for="telephone">
+                Téléphone :
+            </label>
+
+            <input
+                type="text"
+                id="telephone"
+                name="telephone"
+                required
+            >
+
+        </div>
+
+
+        <!-- FONCTION -->
+
+        <div class="form-group">
+
+            <label for="fonction">
+                Fonction :
+            </label>
+
+            <input
+                type="text"
+                id="fonction"
+                name="fonction"
+                required
+            >
+
+        </div>
+
+
+        <!-- BOUTONS -->
+
+        <div class="form-actions">
+
+            <a
+                href="index.php?page=encadreur/index"
+                class="btn btn-secondary"
+            >
+                Annuler
+            </a>
+
+
+            <button
+                type="submit"
+                class="btn btn-primary"
+            >
+                Enregistrer
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+```
+
+</div>
+
+<?php
+
+require_once __DIR__ . '/../layouts/footer.php';
+
+?>

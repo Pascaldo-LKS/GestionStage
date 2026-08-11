@@ -8,15 +8,8 @@ class Router
     }
     public function route()
     {
-        $page = isset($_GET['page']) ? $_GET['page'] : 'auth/login';
-
+        $page = isset($_GET['page']) ? $_GET['page'] : 'auth/etudiant-login';
         switch ($page) {
-
-            case 'auth/login':
-
-                $controller = $this->chargerController("AuthController");
-                $controller->login();
-                break;
 
             case 'etudiant/index':
 
@@ -425,32 +418,7 @@ class Router
 
                 break;
 
-           // case 'auth/login':
-
-          //      $controller = $this->chargerController("AuthController");
-
-           //     $controller->login();
-
-           //     break;
-
-
-            case 'auth/authenticate':
-
-                $controller = $this->chargerController("AuthController");
-
-                $controller->authenticate();
-
-                break;
-
-
-            case 'auth/logout':
-
-                $controller = $this->chargerController("AuthController");
-
-                $controller->logout();
-
-                break;
-
+            
              case 'rapport/validate':
 
                 $controller = $this->chargerController("RapportController");
@@ -520,6 +488,17 @@ class Router
                 $controller->logout();
 
                 break;
+
+                case 'admin/dashboard':
+
+                    
+                    $controller = $this->chargerController("AdminController");
+
+                    $controller->dashboard();
+
+                    break;
+                    
+
 
                 // PAGE INEXISTANTE
              default:

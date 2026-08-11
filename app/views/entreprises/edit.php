@@ -1,71 +1,164 @@
-<!DOCTYPE html>
-<html>
+<?php
 
-<head>
-    <title>Modifier une entreprise</title>
-</head>
-<?php /** @var array $entreprise */
- ?>
-<body>
+$title = "Modifier une entreprise";
 
-<h1>Modifier une entreprise</h1>
+require_once __DIR__ . '/../layouts/header.php';
 
-<form method="POST" action="index.php?page=entreprise/update">
+require_once __DIR__ . '/../layouts/menu-admin.php';
 
+?>
 
-    <input type="hidden"
-           name="id_entreprise"
-           value="<?= $entreprise['id_entreprise']; ?>">
+<div class="page-content">
 
+```
+<div class="page-header">
 
-    <label>Nom de l'entreprise :</label>
+    <div>
 
-    <input type="text"
-           name="nom_entreprise"
-           value="<?= $entreprise['nom_entreprise']; ?>">
+        <h1>Modifier une entreprise</h1>
 
-    <br><br>
+        <p>
+            Modifier les informations de l'entreprise.
+        </p>
 
+    </div>
 
-    <label>Adresse :</label>
+    <a href="index.php?page=entreprise/index"
+       class="btn btn-secondary">
+        ← Retour
+    </a>
 
-    <input type="text"
-           name="adresse"
-           value="<?= $entreprise['adresse']; ?>">
-
-    <br><br>
+</div>
 
 
-    <label>Téléphone :</label>
+<div class="form-card">
 
-    <input type="text"
-           name="telephone"
-           value="<?= $entreprise['telephone']; ?>">
-
-    <br><br>
+    <form method="POST"
+          action="index.php?page=entreprise/update">
 
 
-    <label>Email :</label>
+        <!-- ID ENTREPRISE -->
 
-    <input type="email"
-           name="email"
-           value="<?= $entreprise['email']; ?>">
+        <input
+            type="hidden"
+            name="id_entreprise"
+            value="<?= $entreprise['id_entreprise']; ?>"
+        >
 
-    <br><br>
+
+        <!-- NOM -->
+
+        <div class="form-group">
+
+            <label for="nom_entreprise">
+                Nom de l'entreprise :
+            </label>
+
+            <input
+                type="text"
+                id="nom_entreprise"
+                name="nom_entreprise"
+                value="<?= htmlspecialchars(
+                    $entreprise['nom_entreprise']
+                ); ?>"
+                required
+            >
+
+        </div>
 
 
-    <button type="submit">
-        Modifier
-    </button>
+        <!-- ADRESSE -->
 
-</form>
+        <div class="form-group">
 
-<br>
+            <label for="adresse">
+                Adresse :
+            </label>
 
-<a href="index.php?page=entreprise/index">
-    Retour à la liste
-</a>
+            <input
+                type="text"
+                id="adresse"
+                name="adresse"
+                value="<?= htmlspecialchars(
+                    $entreprise['adresse']
+                ); ?>"
+                required
+            >
 
-</body>
+        </div>
 
-</html>
+
+        <!-- TÉLÉPHONE -->
+
+        <div class="form-group">
+
+            <label for="telephone">
+                Téléphone :
+            </label>
+
+            <input
+                type="text"
+                id="telephone"
+                name="telephone"
+                value="<?= htmlspecialchars(
+                    $entreprise['telephone']
+                ); ?>"
+                required
+            >
+
+        </div>
+
+
+        <!-- EMAIL -->
+
+        <div class="form-group">
+
+            <label for="email">
+                Email :
+            </label>
+
+            <input
+                type="email"
+                id="email"
+                name="email"
+                value="<?= htmlspecialchars(
+                    $entreprise['email']
+                ); ?>"
+                required
+            >
+
+        </div>
+
+
+        <!-- BOUTONS -->
+
+        <div class="form-actions">
+
+            <a
+                href="index.php?page=entreprise/index"
+                class="btn btn-secondary"
+            >
+                Annuler
+            </a>
+
+            <button
+                type="submit"
+                class="btn btn-primary"
+            >
+                Modifier
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+```
+
+</div>
+
+<?php
+
+require_once __DIR__ . '/../layouts/footer.php';
+
+?>

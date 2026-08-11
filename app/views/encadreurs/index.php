@@ -1,65 +1,146 @@
-<!DOCTYPE html>
-<html>
+<?php
 
-<head>
-    <title>Liste des encadreurs</title>
-</head>
-<?php /** @var array $encadreurs */ ?>
-<body>
-    
+$title = "Gestion des encadreurs";
 
-<h1>Liste des encadreurs</h1>
+require_once __DIR__ . '/../layouts/header.php';
 
-<a href="index.php?page=encadreur/create">
-    Ajouter un encadreur
-</a>
+require_once __DIR__ . '/../layouts/menu-admin.php';
 
-<br><br>
+?>
 
-<table border="1">
+<div class="page-content">
 
-    <tr>
-        <th>ID</th>
-        <th>Nom</th>
-        <th>Prénom</th>
-        <th>Email</th>
-        <th>Téléphone</th>
-        <th>Fontion</th>
-        <th>Actions</th>
-    </tr>
+```
+<div class="page-header">
+
+    <div>
+
+        <h1>Liste des encadreurs</h1>
+
+        <p>
+            Gestion des encadreurs de stage.
+        </p>
+
+    </div>
+
+    <a
+        href="index.php?page=encadreur/create"
+        class="btn btn-primary"
+    >
+        + Ajouter un encadreur
+    </a>
+
+</div>
 
 
-    <?php foreach($encadreurs as $encadreur): ?>
+<div class="table-container">
 
-    <tr>
+    <table class="data-table">
 
-        <td>
-            <?= $encadreur['id_encadreur']; ?>
-        </td>
+        <thead>
 
-        <td><?= $encadreur['nom_encadreur']; ?></td>
-        <td><?= $encadreur['prenom_encadreur']; ?></td>
-        <td><?= $encadreur['email']; ?></td>
-        <td> <?= $encadreur['telephone']; ?></td>
-        <td><?= $encadreur['fonction']; ?></td>
+            <tr>
 
-        <td>
-            <a href="index.php?page=encadreur/edit&id=<?= $encadreur['id_encadreur']; ?>">
-                Modifier</a>
+                <th>ID</th>
 
-            <a href="index.php?page=encadreur/delete&id=<?= $encadreur['id_encadreur']; ?>"
-               onclick="return confirm('Voulez-vous supprimer cet encadreur ?');">
-                Supprimer
-            </a>
+                <th>Nom</th>
 
-        </td>
+                <th>Prénom</th>
 
-    </tr>
+                <th>Email</th>
 
-    <?php endforeach; ?>
+                <th>Téléphone</th>
 
-</table>
+                <th>Fonction</th>
 
-</body>
+                <th>Actions</th>
 
-</html>
+            </tr>
+
+        </thead>
+
+
+        <tbody>
+
+            <?php foreach($encadreurs as $encadreur): ?>
+
+            <tr>
+
+                <td>
+                    <?= $encadreur['id_encadreur']; ?>
+                </td>
+
+
+                <td>
+                    <?= htmlspecialchars(
+                        $encadreur['nom_encadreur']
+                    ); ?>
+                </td>
+
+
+                <td>
+                    <?= htmlspecialchars(
+                        $encadreur['prenom_encadreur']
+                    ); ?>
+                </td>
+
+
+                <td>
+                    <?= htmlspecialchars(
+                        $encadreur['email']
+                    ); ?>
+                </td>
+
+
+                <td>
+                    <?= htmlspecialchars(
+                        $encadreur['telephone']
+                    ); ?>
+                </td>
+
+
+                <td>
+                    <?= htmlspecialchars(
+                        $encadreur['fonction']
+                    ); ?>
+                </td>
+
+
+                <td class="actions">
+
+                    <a
+                        href="index.php?page=encadreur/edit&id=<?= $encadreur['id_encadreur']; ?>"
+                        class="btn btn-edit"
+                    >
+                        Modifier
+                    </a>
+
+
+                    <a
+                        href="index.php?page=encadreur/delete&id=<?= $encadreur['id_encadreur']; ?>"
+                        class="btn btn-delete"
+                        onclick="return confirm('Voulez-vous supprimer cet encadreur ?');"
+                    >
+                        Supprimer
+                    </a>
+
+                </td>
+
+            </tr>
+
+            <?php endforeach; ?>
+
+        </tbody>
+
+    </table>
+
+</div>
+```
+
+</div>
+
+<?php
+
+require_once __DIR__ . '/../layouts/footer.php';
+
+?>

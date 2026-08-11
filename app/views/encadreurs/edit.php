@@ -1,66 +1,191 @@
-<!DOCTYPE html>
-<html>
+<?php
 
-<head>
-    <title>Modifier un encadreur</title>
-</head>
-<?php /** @var array $encadreur */ ?>
-<body>
+$title = "Modifier un encadreur";
 
-<h1>Modifier un encadreur</h1>
+require_once __DIR__ . '/../layouts/header.php';
 
+require_once __DIR__ . '/../layouts/menu-admin.php';
 
-<form method="POST" action="index.php?page=encadreur/update">
+?>
 
+<div class="page-content">
 
-    <input type="hidden"
-           name="id_encadreur"
-           value="<?= $encadreur['id_encadreur']; ?>">
+```
+<div class="page-header">
 
+    <div>
 
-    <label>Nom :</label>
+        <h1>Modifier un encadreur</h1>
 
-    <input type="text"
-           name="nom_encadreur"
-           value="<?= $encadreur['nom_encadreur']; ?>">
+        <p>
+            Modifier les informations de l'encadreur.
+        </p>
 
-    <br><br>
+    </div>
 
 
-    <label>Prénom :</label>
+    <a
+        href="index.php?page=encadreur/index"
+        class="btn btn-secondary"
+    >
+        ← Retour
+    </a>
 
-    <input type="text" name="prenom_encadreur" value="<?= $encadreur['prenom_encadreur']; ?>">
-
-    <br><br>
-
-    <label>Email :</label>
-
-    <input type="email" name="email" value="<?= $encadreur['email']; ?>">
-
-    <br><br>
-
-    <label>Téléphone :</label>
-
-    <input type="text" name="telephone" value="<?= $encadreur['telephone']; ?>">
-
-    <br><br>
-    <label>Fonction :</label>
-
-    <input type="text" name="fonction" value="<?= $encadreur['fonction']; ?>">
-
-    <br><br>
-
-    <button type="submit"> Modifier </button>
-
-</form>
+</div>
 
 
-<br>
+<div class="form-card">
 
-<a href="index.php?page=encadreur/index">
-    Retour à la liste
-</a>
+    <form
+        method="POST"
+        action="index.php?page=encadreur/update"
+    >
 
-</body>
 
-</html>
+        <!-- ID ENCADREUR -->
+
+        <input
+            type="hidden"
+            name="id_encadreur"
+            value="<?= $encadreur['id_encadreur']; ?>"
+        >
+
+
+        <!-- NOM -->
+
+        <div class="form-group">
+
+            <label for="nom_encadreur">
+                Nom :
+            </label>
+
+            <input
+                type="text"
+                id="nom_encadreur"
+                name="nom_encadreur"
+                value="<?= htmlspecialchars(
+                    $encadreur['nom_encadreur']
+                ); ?>"
+                required
+            >
+
+        </div>
+
+
+        <!-- PRÉNOM -->
+
+        <div class="form-group">
+
+            <label for="prenom_encadreur">
+                Prénom :
+            </label>
+
+            <input
+                type="text"
+                id="prenom_encadreur"
+                name="prenom_encadreur"
+                value="<?= htmlspecialchars(
+                    $encadreur['prenom_encadreur']
+                ); ?>"
+                required
+            >
+
+        </div>
+
+
+        <!-- EMAIL -->
+
+        <div class="form-group">
+
+            <label for="email">
+                Email :
+            </label>
+
+            <input
+                type="email"
+                id="email"
+                name="email"
+                value="<?= htmlspecialchars(
+                    $encadreur['email']
+                ); ?>"
+                required
+            >
+
+        </div>
+
+
+        <!-- TÉLÉPHONE -->
+
+        <div class="form-group">
+
+            <label for="telephone">
+                Téléphone :
+            </label>
+
+            <input
+                type="text"
+                id="telephone"
+                name="telephone"
+                value="<?= htmlspecialchars(
+                    $encadreur['telephone']
+                ); ?>"
+                required
+            >
+
+        </div>
+
+
+        <!-- FONCTION -->
+
+        <div class="form-group">
+
+            <label for="fonction">
+                Fonction :
+            </label>
+
+            <input
+                type="text"
+                id="fonction"
+                name="fonction"
+                value="<?= htmlspecialchars(
+                    $encadreur['fonction']
+                ); ?>"
+                required
+            >
+
+        </div>
+
+
+        <!-- BOUTONS -->
+
+        <div class="form-actions">
+
+            <a
+                href="index.php?page=encadreur/index"
+                class="btn btn-secondary"
+            >
+                Annuler
+            </a>
+
+
+            <button
+                type="submit"
+                class="btn btn-primary"
+            >
+                Modifier
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+```
+
+</div>
+
+<?php
+
+require_once __DIR__ . '/../layouts/footer.php';
+
+?>

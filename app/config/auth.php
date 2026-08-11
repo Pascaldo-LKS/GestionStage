@@ -48,7 +48,7 @@ function requireConnexion()
 {
     if (!estConnecte()) {
 
-        header("Location: index.php?page=auth/login");
+        header("Location: index.php?page=auth/etudiant-login");
 
         exit;
     }
@@ -63,11 +63,17 @@ function requireConnexion()
 
 function requireAdmin()
 {
-    requireConnexion();
+    if (!estConnecte()) {
+
+        header("Location: index.php?page=auth/admin-login");
+
+        exit;
+    }
+
 
     if ($_SESSION['role'] !== 'Administrateur') {
 
-        header("Location: index.php?page=auth/login");
+        header("Location: index.php?page=auth/etudiant-login");
 
         exit;
     }
@@ -82,11 +88,17 @@ function requireAdmin()
 
 function requireEtudiant()
 {
-    requireConnexion();
+    if (!estConnecte()) {
+
+        header("Location: index.php?page=auth/etudiant-login");
+
+        exit;
+    }
+
 
     if ($_SESSION['role'] !== 'Etudiant') {
 
-        header("Location: index.php?page=auth/login");
+        header("Location: index.php?page=auth/admin-login");
 
         exit;
     }

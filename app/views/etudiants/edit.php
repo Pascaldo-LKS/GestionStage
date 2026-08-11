@@ -1,176 +1,316 @@
-<!DOCTYPE html>
-<html>
+<?php
 
-<head>
-    <title>Modifier un étudiant</title>
-</head>
+$title = "Modifier un étudiant";
+
+require_once __DIR__ . '/../layouts/header.php';
+
+require_once __DIR__ . '/../layouts/menu-admin.php';
+
+?>
 <?php
 /** @var array $filieres */
 /** @var array $niveaux */
 /** @var array $annees */
-/** @var array $etudiant*/
 /** @var array $encadreurs */
+/** @var array $etudiant */
+
 ?>
-<body>
 
-<h1>Modifier un étudiant</h1>
+<div class="page-content">
 
-<form method="POST" action="index.php?page=etudiant/update">
+```
+<div class="page-header">
 
-<input type="hidden"
-       name="id_etudiant"
-       value="<?= $etudiant['id_etudiant']; ?>">
-<label>Nom :</label>
-<input type="text"
-       name="nom"
-       value="<?= $etudiant['nom']; ?>">
-<br><br>
+    <div>
 
-<label>Prénom :</label>
-<input type="text"
-       name="prenom"
-       value="<?= $etudiant['prenom']; ?>">
-<br><br>
+        <h1>Modifier un étudiant</h1>
 
-<label>Email :</label>
-<input type="email"
-       name="email"
-       value="<?= $etudiant['email']; ?>">
-<br><br>
+        <p>
+            Modifier les informations de l'étudiant.
+        </p>
 
-<label>Filière :</label>
-<select name="id_filiere">
+    </div>
 
-    <?php foreach($filieres as $filiere): ?>
+    <a href="index.php?page=etudiant/index"
+       class="btn btn-secondary">
+        ← Retour
+    </a>
 
-        <option
-            value="<?= $filiere['id_filiere']; ?>"
-            <?= $filiere['id_filiere'] == $etudiant['id_filiere'] ? 'selected' : ''; ?>
-        >
-
-            <?= $filiere['nom_filiere']; ?>
-
-        </option>
-
-    <?php endforeach; ?>
-
-</select>
-
-<br><br>
-<label>Niveau :</label>
-
-<select name="id_niveau">
-
-    <?php foreach($niveaux as $niveau): ?>
-
-        <option
-            value="<?= $niveau['id_niveau']; ?>"
-            <?= $niveau['id_niveau'] == $etudiant['id_niveau'] ? 'selected' : ''; ?>
-        >
-
-            <?= $niveau['nom_niveau']; ?>
-
-        </option>
-
-    <?php endforeach; ?>
-
-</select>
-
-<br><br>
-
-<label>Année académique :</label>
-
-<select name="id_annee">
-
-    <?php foreach($annees as $annee): ?>
-
-        <option
-            value="<?= $annee['id_annee']; ?>"
-            <?= $annee['id_annee'] == $etudiant['id_annee'] ? 'selected' : ''; ?>
-        >
-
-            <?= $annee['libelle']; ?>
-
-        </option>
-
-    <?php endforeach; ?>
-
-</select>
-
-<br><br>
-
-<br><br>
-
-<label>Année académique :</label>
-
-<select name="id_encadreur">
-
-    <?php foreach($annees as $annee): ?>
-
-        <option
-            value="<?= $annee['id_annee']; ?>"
-            <?= $annee['id_annee'] == $etudiant['id_annee'] ? 'selected' : ''; ?>
-        >
-
-            <?= $annee['libelle']; ?>
-
-        </option>
-
-    <?php endforeach; ?>
-
-</select>
-<br><br>
-<div id="encadreurDiv" style="display: none;">
-    <label>Encadreur :</label>
-
-    <select name="id_encadreur">
-
-        <option value=""> Aucun encadreur </option>
-
-    <?php foreach($encadreurs as $encadreur): ?>
-
-        <option
-            value="<?= $encadreur['id_encadreur']; ?>"
-            <?= $encadreur['id_encadreur'] == $etudiant['id_encadreur'] ? 'selected' : ''; ?>
-        >
-
-            <?= $encadreur['nom_encadreur'] . ' ' . $encadreur['prenom_encadreur']; ?>
-
-        </option>
-
-    <?php endforeach; ?>
-
-    </select>
 </div>
 
-<br><br>
+
+<div class="form-card">
+
+    <form method="POST"
+          action="index.php?page=etudiant/update">
 
 
-<button type="submit">
-    Modifier
-</button>
+        <!-- ID ÉTUDIANT -->
+
+        <input
+            type="hidden"
+            name="id_etudiant"
+            value="<?= $etudiant['id_etudiant']; ?>"
+        >
 
 
-</form>
+        <!-- NOM -->
+
+        <div class="form-group">
+
+            <label for="nom">
+                Nom :
+            </label>
+
+            <input
+                type="text"
+                id="nom"
+                name="nom"
+                value="<?= htmlspecialchars($etudiant['nom']); ?>"
+                required
+            >
+
+        </div>
 
 
-<br>
+        <!-- PRÉNOM -->
 
-<a href="index.php?page=etudiant/index">
-    Retour à la liste
-</a>
+        <div class="form-group">
+
+            <label for="prenom">
+                Prénom :
+            </label>
+
+            <input
+                type="text"
+                id="prenom"
+                name="prenom"
+                value="<?= htmlspecialchars($etudiant['prenom']); ?>"
+                required
+            >
+
+        </div>
+
+
+        <!-- EMAIL -->
+
+        <div class="form-group">
+
+            <label for="email">
+                Email :
+            </label>
+
+            <input
+                type="email"
+                id="email"
+                name="email"
+                value="<?= htmlspecialchars($etudiant['email']); ?>"
+                required
+            >
+
+        </div>
+
+
+        <!-- FILIÈRE -->
+
+        <div class="form-group">
+
+            <label for="id_filiere">
+                Filière :
+            </label>
+
+            <select
+                id="id_filiere"
+                name="id_filiere"
+                required
+            >
+
+                <?php foreach($filieres as $filiere): ?>
+
+                    <option
+                        value="<?= $filiere['id_filiere']; ?>"
+                        <?= $filiere['id_filiere'] == $etudiant['id_filiere'] ? 'selected' : ''; ?>
+                    >
+
+                        <?= htmlspecialchars(
+                            $filiere['nom_filiere']
+                        ); ?>
+
+                    </option>
+
+                <?php endforeach; ?>
+
+            </select>
+
+        </div>
+
+
+        <!-- NIVEAU -->
+
+        <div class="form-group">
+
+            <label for="id_niveau">
+                Niveau :
+            </label>
+
+            <select
+                id="id_niveau"
+                name="id_niveau"
+            >
+
+                <?php foreach($niveaux as $niveau): ?>
+
+                    <option
+                        value="<?= $niveau['id_niveau']; ?>"
+                        <?= $niveau['id_niveau'] == $etudiant['id_niveau'] ? 'selected' : ''; ?>
+                    >
+
+                        <?= htmlspecialchars(
+                            $niveau['nom_niveau']
+                        ); ?>
+
+                    </option>
+
+                <?php endforeach; ?>
+
+            </select>
+
+        </div>
+
+
+        <!-- ANNÉE ACADÉMIQUE -->
+
+        <div class="form-group">
+
+            <label for="id_annee">
+                Année académique :
+            </label>
+
+            <select
+                id="id_annee"
+                name="id_annee"
+                required
+            >
+
+                <?php foreach($annees as $annee): ?>
+
+                    <option
+                        value="<?= $annee['id_annee']; ?>"
+                        <?= $annee['id_annee'] == $etudiant['id_annee'] ? 'selected' : ''; ?>
+                    >
+
+                        <?= htmlspecialchars(
+                            $annee['libelle']
+                        ); ?>
+
+                    </option>
+
+                <?php endforeach; ?>
+
+            </select>
+
+        </div>
+
+
+        <!-- ENCADREUR -->
+
+        <div
+            class="form-group"
+            id="encadreurDiv"
+            style="display: none;"
+        >
+
+            <label for="id_encadreur">
+                Encadreur :
+            </label>
+
+            <select
+                id="id_encadreur"
+                name="id_encadreur"
+            >
+
+                <option value="">
+                    -- Aucun encadreur --
+                </option>
+
+                <?php foreach($encadreurs as $encadreur): ?>
+
+                    <option
+                        value="<?= $encadreur['id_encadreur']; ?>"
+                        <?= $encadreur['id_encadreur'] == $etudiant['id_encadreur'] ? 'selected' : ''; ?>
+                    >
+
+                        <?= htmlspecialchars(
+                            $encadreur['nom_encadreur']
+                            . ' '
+                            . $encadreur['prenom_encadreur']
+                        ); ?>
+
+                    </option>
+
+                <?php endforeach; ?>
+
+            </select>
+
+        </div>
+
+
+        <!-- BOUTONS -->
+
+        <div class="form-actions">
+
+            <a
+                href="index.php?page=etudiant/index"
+                class="btn btn-secondary"
+            >
+                Annuler
+            </a>
+
+            <button
+                type="submit"
+                class="btn btn-primary"
+            >
+                Modifier
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+```
+
+</div>
+
+<?php
+
+require_once __DIR__ . '/../layouts/footer.php';
+
+?>
 
 <script>
 
 function afficherEncadreur()
 {
-    let niveau = document.querySelector('select[name="id_niveau"]');
+    const niveau =
+        document.querySelector('select[name="id_niveau"]');
 
-    let encadreurDiv = document.getElementById('encadreurDiv');
+    const encadreurDiv =
+        document.getElementById('encadreurDiv');
 
-    if(niveau.options[niveau.selectedIndex].text === "Licence 3")
+
+    if (!niveau || !encadreurDiv) {
+        return;
+    }
+
+
+    const niveauSelectionne =
+        niveau.options[niveau.selectedIndex].text.trim();
+
+
+    if (niveauSelectionne === "Licence 3")
     {
-        encadreurDiv.style.display = "block";
+        encadreurDiv.style.display = "flex";
     }
     else
     {
@@ -178,12 +318,22 @@ function afficherEncadreur()
     }
 }
 
-document.querySelector('select[name="id_niveau"]')
-    .addEventListener('change', afficherEncadreur);
 
-afficherEncadreur();
+document.addEventListener("DOMContentLoaded", function()
+{
+    const niveau =
+        document.querySelector('select[name="id_niveau"]');
+
+
+    if (niveau)
+    {
+        niveau.addEventListener(
+            'change',
+            afficherEncadreur
+        );
+
+        afficherEncadreur();
+    }
+});
 
 </script>
-</body>
-
-</html>

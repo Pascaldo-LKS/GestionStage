@@ -1,77 +1,137 @@
-<!DOCTYPE html>
-<html>
+<?php
 
-<head>
-    <title>Liste des entreprises</title>
-</head>
+$title = "Gestion des entreprises";
+
+require_once __DIR__ . '/../layouts/header.php';
+
+require_once __DIR__ . '/../layouts/menu-admin.php';
+
+?>
 <?php /** @var array $entreprises */ ?>
-<body>
 
-<h1>Liste des entreprises</h1>
+<div class="page-content">
 
-<a href="index.php?page=entreprise/create">
-    Ajouter une entreprise
-</a>
+```
+<div class="page-header">
 
-<br><br>
+    <div>
 
-<table border="1">
+        <h1>Liste des entreprises</h1>
 
-    <tr>
-        <th>ID</th>
-        <th>Nom de l'entreprise</th>
-        <th>Adresse</th>
-        <th>Téléphone</th>
-        <th>Email</th>
-        <th>Actions</th>
-    </tr>
+        <p>
+            Gestion des entreprises d'accueil des stages.
+        </p>
+
+    </div>
 
 
-    <?php foreach($entreprises as $entreprise): ?>
+    <a href="index.php?page=entreprise/create"
+       class="btn btn-primary">
+        + Ajouter une entreprise
+    </a>
 
-    <tr>
+</div>
 
-        <td>
-            <?= $entreprise['id_entreprise']; ?>
-        </td>
 
-        <td>
-            <?= $entreprise['nom_entreprise']; ?>
-        </td>
+<div class="table-container">
 
-        <td>
-            <?= $entreprise['adresse']; ?>
-        </td>
+    <table class="data-table">
 
-        <td>
-            <?= $entreprise['telephone']; ?>
-        </td>
+        <thead>
 
-        <td>
-            <?= $entreprise['email']; ?>
-        </td>
+            <tr>
 
-        <td>
+                <th>ID</th>
 
-            <a href="index.php?page=entreprise/edit&id=<?= $entreprise['id_entreprise']; ?>">
-                Modifier
-            </a>
+                <th>Nom de l'entreprise</th>
 
-            |
+                <th>Adresse</th>
 
-            <a href="index.php?page=entreprise/delete&id=<?= $entreprise['id_entreprise']; ?>"
-               onclick="return confirm('Voulez-vous supprimer cette entreprise ?');">
-                Supprimer
-            </a>
+                <th>Téléphone</th>
 
-        </td>
+                <th>Email</th>
 
-    </tr>
+                <th>Actions</th>
 
-    <?php endforeach; ?>
+            </tr>
 
-</table>
+        </thead>
 
-</body>
 
-</html>
+        <tbody>
+
+            <?php foreach($entreprises as $entreprise): ?>
+
+            <tr>
+
+                <td>
+                    <?= $entreprise['id_entreprise']; ?>
+                </td>
+
+
+                <td>
+                    <?= htmlspecialchars(
+                        $entreprise['nom_entreprise']
+                    ); ?>
+                </td>
+
+
+                <td>
+                    <?= htmlspecialchars(
+                        $entreprise['adresse']
+                    ); ?>
+                </td>
+
+
+                <td>
+                    <?= htmlspecialchars(
+                        $entreprise['telephone']
+                    ); ?>
+                </td>
+
+
+                <td>
+                    <?= htmlspecialchars(
+                        $entreprise['email']
+                    ); ?>
+                </td>
+
+
+                <td class="actions">
+
+                    <a
+                        href="index.php?page=entreprise/edit&id=<?= $entreprise['id_entreprise']; ?>"
+                        class="btn btn-edit"
+                    >
+                        Modifier
+                    </a>
+
+
+                    <a
+                        href="index.php?page=entreprise/delete&id=<?= $entreprise['id_entreprise']; ?>"
+                        class="btn btn-delete"
+                        onclick="return confirm('Voulez-vous supprimer cette entreprise ?');"
+                    >
+                        Supprimer
+                    </a>
+
+                </td>
+
+            </tr>
+
+            <?php endforeach; ?>
+
+        </tbody>
+
+    </table>
+
+</div>
+```
+
+</div>
+
+<?php
+
+require_once __DIR__ . '/../layouts/footer.php';
+
+?>

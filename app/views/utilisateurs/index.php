@@ -1,76 +1,126 @@
-<!DOCTYPE html>
-<html>
+<?php
 
-<head>
-    <title>Liste des utilisateurs</title>
-</head>
-<?php /** @var array $utilisateurs */  ?>
-<body>
-    
-<a href="index.php?page=auth/logout">
-    Se déconnecter
-</a>
+$title = "Gestion des utilisateurs";
 
-<br><br>
-<h1>Liste des utilisateurs</h1>
+require_once __DIR__ . '/../layouts/header.php';
 
-<a href="index.php?page=utilisateur/create">
-    Ajouter un utilisateur
-</a>
+require_once __DIR__ . '/../layouts/menu-admin.php';
 
-<br><br>
+?>
 
-<table border="1">
+<div class="page-content">
 
-    <tr>
-        <th>ID</th>
-        <th>Nom utilisateur</th>
-        <th>Rôle</th>
-        <th>ID Étudiant</th>
-        <th>Actions</th>
-    </tr>
+```
+<div class="page-header">
 
-    <?php foreach($utilisateurs as $utilisateur): ?>
+    <div>
+        <h1>Liste des utilisateurs</h1>
 
-    <tr>
+        <p>
+            Gestion des comptes utilisateurs de la plateforme.
+        </p>
+    </div>
 
-        <td>
-            <?= $utilisateur['id_utilisateur']; ?>
-        </td>
+    <a href="index.php?page=utilisateur/create"
+       class="btn btn-primary">
+        + Ajouter un utilisateur
+    </a>
 
-        <td>
-            <?= $utilisateur['nom_utilisateur']; ?>
-        </td>
+</div>
 
-        <td>
-            <?= $utilisateur['role']; ?>
-        </td>
 
-        <td>
-            <?= $utilisateur['id_etudiant']; ?>
-        </td>
+<div class="table-container">
 
-        <td>
+    <table class="data-table">
 
-            <a href="index.php?page=utilisateur/edit&id=<?= $utilisateur['id_utilisateur']; ?>">
-                Modifier
-            </a>
+        <thead>
 
-            |
+            <tr>
 
-            <a href="index.php?page=utilisateur/delete&id=<?= $utilisateur['id_utilisateur']; ?>"
-               onclick="return confirm('Voulez-vous supprimer cet utilisateur ?');">
-                Supprimer
-            </a>
+                <th>ID</th>
 
-        </td>
+                <th>Nom utilisateur</th>
 
-    </tr>
+                <th>Rôle</th>
 
-    <?php endforeach; ?>
+                <th>ID Étudiant</th>
 
-</table>
+                <th>Actions</th>
 
-</body>
+            </tr>
 
-</html>
+        </thead>
+
+
+        <tbody>
+
+            <?php foreach($utilisateurs as $utilisateur): ?>
+
+            <tr>
+
+                <td>
+                    <?= $utilisateur['id_utilisateur']; ?>
+                </td>
+
+
+                <td>
+                    <?= htmlspecialchars(
+                        $utilisateur['nom_utilisateur']
+                    ); ?>
+                </td>
+
+
+                <td>
+                    <span class="badge">
+
+                        <?= htmlspecialchars(
+                            $utilisateur['role']
+                        ); ?>
+
+                    </span>
+                </td>
+
+
+                <td>
+                    <?= $utilisateur['id_etudiant'] ?? '-'; ?>
+                </td>
+
+
+                <td class="actions">
+
+                    <a
+                        href="index.php?page=utilisateur/edit&id=<?= $utilisateur['id_utilisateur']; ?>"
+                        class="btn btn-edit"
+                    >
+                        Modifier
+                    </a>
+
+
+                    <a
+                        href="index.php?page=utilisateur/delete&id=<?= $utilisateur['id_utilisateur']; ?>"
+                        class="btn btn-delete"
+                        onclick="return confirm('Voulez-vous supprimer cet utilisateur ?');"
+                    >
+                        Supprimer
+                    </a>
+
+                </td>
+
+            </tr>
+
+            <?php endforeach; ?>
+
+        </tbody>
+
+    </table>
+
+</div>
+```
+
+</div>
+
+<?php
+
+require_once __DIR__ . '/../layouts/footer.php';
+
+?>

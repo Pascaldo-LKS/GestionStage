@@ -1,56 +1,143 @@
-<!DOCTYPE html>
-<html>
+<?php
 
-<head>
-    <title>Ajouter une entreprise</title>
-</head>
+$title = "Ajouter une entreprise";
 
-<body>
+require_once __DIR__ . '/../layouts/header.php';
 
-<h1>Ajouter une entreprise</h1>
+require_once __DIR__ . '/../layouts/menu-admin.php';
 
-<form method="POST" action="index.php?page=entreprise/store">
+?>
 
-    <label>Nom de l'entreprise :</label>
+<div class="page-content">
 
-    <input type="text" name="nom_entreprise">
+```
+<div class="page-header">
 
-    <br><br>
+    <div>
 
+        <h1>Ajouter une entreprise</h1>
 
-    <label>Adresse :</label>
+        <p>
+            Enregistrer une nouvelle entreprise d'accueil.
+        </p>
 
-    <input type="text" name="adresse">
+    </div>
 
-    <br><br>
+    <a href="index.php?page=entreprise/index"
+       class="btn btn-secondary">
+        ← Retour
+    </a>
 
-
-    <label>Téléphone :</label>
-
-    <input type="text" name="telephone">
-
-    <br><br>
-
-
-    <label>Email :</label>
-
-    <input type="email" name="email">
-
-    <br><br>
+</div>
 
 
-    <button type="submit">
-        Enregistrer
-    </button>
+<div class="form-card">
 
-</form>
+    <form method="POST"
+          action="index.php?page=entreprise/store">
 
-<br>
 
-<a href="index.php?page=entreprise/index">
-    Retour à la liste
-</a>
+        <!-- NOM DE L'ENTREPRISE -->
 
-</body>
+        <div class="form-group">
 
-</html>
+            <label for="nom_entreprise">
+                Nom de l'entreprise :
+            </label>
+
+            <input
+                type="text"
+                id="nom_entreprise"
+                name="nom_entreprise"
+                required
+            >
+
+        </div>
+
+
+        <!-- ADRESSE -->
+
+        <div class="form-group">
+
+            <label for="adresse">
+                Adresse :
+            </label>
+
+            <input
+                type="text"
+                id="adresse"
+                name="adresse"
+                required
+            >
+
+        </div>
+
+
+        <!-- TÉLÉPHONE -->
+
+        <div class="form-group">
+
+            <label for="telephone">
+                Téléphone :
+            </label>
+
+            <input
+                type="text"
+                id="telephone"
+                name="telephone"
+                required
+            >
+
+        </div>
+
+
+        <!-- EMAIL -->
+
+        <div class="form-group">
+
+            <label for="email">
+                Email :
+            </label>
+
+            <input
+                type="email"
+                id="email"
+                name="email"
+                required
+            >
+
+        </div>
+
+
+        <!-- BOUTONS -->
+
+        <div class="form-actions">
+
+            <a
+                href="index.php?page=entreprise/index"
+                class="btn btn-secondary"
+            >
+                Annuler
+            </a>
+
+            <button
+                type="submit"
+                class="btn btn-primary"
+            >
+                Enregistrer
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+```
+
+</div>
+
+<?php
+
+require_once __DIR__ . '/../layouts/footer.php';
+
+?>

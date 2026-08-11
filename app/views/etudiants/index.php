@@ -1,65 +1,154 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <title>Liste des étudiants</title>
-</head>
 <?php
-/** @var array $etudiants */
+
+$title = "Gestion des étudiants";
+
+require_once __DIR__ . '/../layouts/header.php';
+
+require_once __DIR__ . '/../layouts/menu-admin.php';
+
 ?>
-<body>
+<?php  /** @var array $etudiants */ ?>
+<div class="page-content">
 
-<h1>Liste des étudiants</h1>
+```
+<div class="page-header">
 
-<a href="index.php?page=etudiant/create">
-    Ajouter un étudiant
-</a>
+    <div>
 
-<br><br>
+        <h1>Liste des étudiants</h1>
 
-<table border="3">
+        <p>
+            Gestion des étudiants inscrits.
+        </p>
 
-    <tr>
-        <th>ID</th>
-        <th>Nom</th>
-        <th>Prénom</th>
-        <th>Email</th>
-        <th>Encadreur</th>
-        <th>Filière</th>
-        <th>Niveau</th>
-        <th>Année académique</th>
-        <th>Action</th>
-    </tr>
+    </div>
 
-    <?php foreach($etudiants as $etudiant): ?>
-    <tr>
-        <td> <?= $etudiant['id_etudiant']; ?> </td>
 
-        <td>   <?= $etudiant['nom']; ?></td>
+    <a href="index.php?page=etudiant/create"
+       class="btn btn-primary">
+        + Ajouter un étudiant
+    </a>
 
-        <td>   <?= $etudiant['prenom']; ?> </td>
+</div>
 
-        <td>     <?= $etudiant['email']; ?> </td>
 
-        <td>   <?= $etudiant['nom_encadreur'] . ' ' . $etudiant['prenom_encadreur'] ;  ?> </td>
+<div class="table-container">
 
-        <td>   <?= $etudiant['nom_filiere']; ?> </td>
+    <table class="data-table">
 
-        <td>    <?= $etudiant['nom_niveau']; ?> </td>
+        <thead>
 
-        <td>    <?= $etudiant['libelle']; ?></td>
+            <tr>
 
-        <td>
-            <a href="index.php?page=etudiant/edit&id=<?= $etudiant['id_etudiant']; ?>">   Modifier</a>
+                <th>ID</th>
 
-             <a href="index.php?page=etudiant/delete&id=<?= $etudiant['id_etudiant']; ?>"
-            onclick="return confirm('Voulez-vous supprimer cet étudiant ?');"> Supprimer</a>
-        </td>
-    </tr>
-     <?php endforeach; ?>
+                <th>Nom</th>
 
-</table>
+                <th>Prénom</th>
 
-</body>
+                <th>Email</th>
 
-</html>
+                <th>Encadreur</th>
+
+                <th>Filière</th>
+
+                <th>Niveau</th>
+
+                <th>Année académique</th>
+
+                <th>Action</th>
+
+            </tr>
+
+        </thead>
+
+
+        <tbody>
+
+            <?php foreach($etudiants as $etudiant): ?>
+
+            <tr>
+
+                <td>
+                    <?= $etudiant['id_etudiant']; ?>
+                </td>
+
+
+                <td>
+                    <?= htmlspecialchars($etudiant['nom']); ?>
+                </td>
+
+
+                <td>
+                    <?= htmlspecialchars($etudiant['prenom']); ?>
+                </td>
+
+
+                <td>
+                    <?= htmlspecialchars($etudiant['email']); ?>
+                </td>
+
+
+                <td>
+
+                    <?= htmlspecialchars(
+                        $etudiant['nom_encadreur'] . ' ' .
+                        $etudiant['prenom_encadreur']
+                    ); ?>
+
+                </td>
+
+
+                <td>
+                    <?= htmlspecialchars($etudiant['nom_filiere']); ?>
+                </td>
+
+
+                <td>
+                    <?= htmlspecialchars($etudiant['nom_niveau']); ?>
+                </td>
+
+
+                <td>
+                    <?= htmlspecialchars($etudiant['libelle']); ?>
+                </td>
+
+
+                <td class="actions">
+
+                    <a
+                        href="index.php?page=etudiant/edit&id=<?= $etudiant['id_etudiant']; ?>"
+                        class="btn btn-edit"
+                    >
+                        Modifier
+                    </a>
+
+
+                    <a
+                        href="index.php?page=etudiant/delete&id=<?= $etudiant['id_etudiant']; ?>"
+                        class="btn btn-delete"
+                        onclick="return confirm('Voulez-vous supprimer cet étudiant ?');"
+                    >
+                        Supprimer
+                    </a>
+
+                </td>
+
+            </tr>
+
+            <?php endforeach; ?>
+
+        </tbody>
+
+    </table>
+
+</div>
+```
+
+</div>
+
+<?php
+
+require_once __DIR__ . '/../layouts/footer.php';
+
+?>
