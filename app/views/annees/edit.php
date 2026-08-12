@@ -8,10 +8,10 @@
 /** @var array $annee */
 ?>
 
-<body>
+<main>
     
-
 <h1>Modifier une date</h1>
+
 <form method="POST" action="index.php?page=annee/update">
 
 <input type="hidden"  name="id_annee"  value="<?= $annee['id_annee']; ?> ">
@@ -23,5 +23,11 @@ Nom de la filière :
 
 <button type="submit"> Modifier </button>
 </form>
-</body>
+<?php
+
+require_once __DIR__ . '/../layouts/footer.php';
+
+?>
+
+</main>
 </html>

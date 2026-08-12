@@ -34,29 +34,6 @@ $user = utilisateurConnecte();
             ☰
         </button>
 
-        <a href="index.php"
-           class="logo">
-            GestionStage
-        </a>
-
-    </div>
-
-
-    <div class="topbar-right">
-
-        <?php if ($user): ?>
-
-            <span class="user-name">
-                <?= htmlspecialchars($user['nom_utilisateur']); ?>
-            </span>
-
-            <a href="index.php?page=auth/logout"
-               class="logout-button">
-                Déconnexion
-            </a>
-
-        <?php endif; ?>
-
     </div>
 
 </header>

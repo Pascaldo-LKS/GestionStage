@@ -1,50 +1,117 @@
-<!DOCTYPE html>
-<html>
+<?php
+/** @var array $stage */
+?>
 
-<head>
-    <title>Déposer un rapport</title>
-</head>
-<?php /** @var array $stage */ ?>
-<body>
+<?php
+$title = "Déposer un rapport";
 
-<h1>Déposer mon rapport</h1>
+require_once __DIR__ . '/../layouts/header.php';
+require_once __DIR__ . '/../layouts/menu-etudiant.php';
+?>
 
-<p>
-    Stage en cours :
-    <strong>
-        <?= $stage['date_debut']; ?>
-        au
-        <?= $stage['date_fin']; ?>
-    </strong>
-</p>
+<main>
 
-<form method="POST"
-      action="index.php?page=rapport/store"
-      enctype="multipart/form-data">
+    <div class="page-content">
 
-    <label>Choisir mon rapport PDF :</label>
+        <div class="page-header">
 
-    <br><br>
+            <div>
 
-    <input type="file"
-           name="fichier"
-           accept=".pdf"
-           required>
+                <h1>Déposer mon rapport</h1>
 
-    <br><br>
+                <p>
+                    Déposez votre rapport de stage au format PDF.
+                </p>
 
-    <button type="submit">
-        Déposer mon rapport
-    </button>
+            </div>
 
-</form>
+        </div>
 
-<br>
 
-<a href="index.php?page=rapport/index">
-    Retour
-</a>
+        <div class="form-container">
 
-</body>
 
-</html>
+            <!-- INFORMATIONS DU STAGE -->
+
+            <div class="info-box">
+
+                <h3>Mon stage</h3>
+
+                <p>
+
+                    <strong>Date de début :</strong>
+
+                    <?= htmlspecialchars($stage['date_debut']); ?>
+
+                </p>
+
+
+                <p>
+
+                    <strong>Date de fin :</strong>
+
+                    <?= htmlspecialchars($stage['date_fin']); ?>
+
+                </p>
+
+            </div>
+
+
+            <!-- FORMULAIRE -->
+
+            <form
+                method="POST"
+                action="index.php?page=rapport/store"
+                enctype="multipart/form-data"
+            >
+
+                <div class="form-group">
+
+                    <label for="fichier">
+                        Rapport PDF
+                    </label>
+
+                    <input
+                        type="file"
+                        id="fichier"
+                        name="fichier"
+                        accept=".pdf"
+                        required
+                    >
+
+                    <small>
+                        Format accepté : PDF
+                    </small>
+
+                </div>
+
+
+                <div class="form-actions">
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary"
+                    >
+                        Déposer mon rapport
+                    </button>
+
+
+                    <a
+                        href="index.php?page=rapport/index"
+                        class="btn btn-secondary"
+                    >
+                        Retour
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<?php require_once __DIR__ . '/../layouts/footer.php'; ?>

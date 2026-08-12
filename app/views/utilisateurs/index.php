@@ -82,7 +82,7 @@ require_once __DIR__ . '/../layouts/menu-admin.php';
 
 
                 <td>
-                    <?= $utilisateur['id_etudiant'] ?? '-'; ?>
+                    <?= htmlspecialchars( $utilisateur['nom'] ?? '-'); ?>
                 </td>
 
 

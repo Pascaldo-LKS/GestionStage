@@ -1,104 +1,211 @@
-<!DOCTYPE html>
-<html>
+<?php
+/** @var array $rapport */
+/** @var array $stages */
+?>
 
-<head>
-    <title>Modifier un rapport</title>
-</head>
-<?php  /** @var array $rapport */ 
- /** @var array $stages */  ?>
-<body>
+<?php
+$title = "Modifier un rapport";
 
-<h1>Modifier un rapport</h1>
+require_once __DIR__ . '/../layouts/header.php';
+require_once __DIR__ . '/../layouts/menu-admin.php';
+?>
 
-<form method="POST"
-      action="index.php?page=rapport/update"
-      enctype="multipart/form-data">
+<main>
 
-    <input type="hidden"
-           name="id_rapport"
-           value="<?= $rapport['id_rapport']; ?>">
+    <div class="page-content">
 
+        <div class="page-header">
 
-    <p>
-        Fichier actuel :
-        <strong><?= $rapport['fichier']; ?></strong>
-    </p>
+            <div>
 
+                <h1>Modifier un rapport</h1>
 
-    <label>Nouveau fichier PDF :</label>
+                <p>
+                    Modifier les informations du rapport.
+                </p>
 
-    <input type="file"
-           name="fichier"
-           accept=".pdf">
+            </div>
 
-    <br><br>
+        </div>
 
 
-    <label>Statut :</label>
+        <div class="form-container">
 
-    <select name="statut_validation">
-
-        <option value="En attente"
-            <?= $rapport['statut_validation'] == 'En attente' ? 'selected' : ''; ?>>
-            En attente
-        </option>
-
-        <option value="Valide"
-            <?= $rapport['statut_validation'] == 'Valide' ? 'selected' : ''; ?>>
-            Valide
-        </option>
-
-        <option value="Refuse"
-            <?= $rapport['statut_validation'] == 'Refuse' ? 'selected' : ''; ?>>
-            Refusé
-        </option>
-
-    </select>
-
-    <br><br>
-
-
-    <label>Stage :</label>
-
-    <select name="id_stage" required>
-
-        <?php foreach($stages as $stage): ?>
-
-            <option
-                value="<?= $stage['id_stage']; ?>"
-                <?= $stage['id_stage'] == $rapport['id_stage'] ? 'selected' : ''; ?>
+            <form
+                method="POST"
+                action="index.php?page=rapport/update"
+                enctype="multipart/form-data"
             >
 
-                Stage <?= $stage['id_stage']; ?>
-
-                -
-                <?= $stage['date_debut']; ?>
-
-                au
-
-                <?= $stage['date_fin']; ?>
-
-            </option>
-
-        <?php endforeach; ?>
-
-    </select>
-
-    <br><br>
+                <input
+                    type="hidden"
+                    name="id_rapport"
+                    value="<?= $rapport['id_rapport']; ?>"
+                >
 
 
-    <button type="submit">
-        Modifier
-    </button>
+                <!-- FICHIER ACTUEL -->
 
-</form>
+                <div class="info-box">
 
-<br>
+                    <p>
 
-<a href="index.php?page=rapport/index">
-    Retour à la liste
-</a>
+                        <strong>Fichier actuel :</strong>
 
-</body>
+                        <?= htmlspecialchars(
+                            $rapport['fichier']
+                        ); ?>
 
-</html>
+                    </p>
+
+                </div>
+
+
+                <!-- NOUVEAU FICHIER -->
+
+                <div class="form-group">
+
+                    <label for="fichier">
+                        Nouveau fichier PDF
+                    </label>
+
+                    <input
+                        type="file"
+                        id="fichier"
+                        name="fichier"
+                        accept=".pdf"
+                    >
+
+                    <small>
+                        Laissez vide si vous ne souhaitez pas changer le fichier.
+                    </small>
+
+                </div>
+
+
+                <!-- STATUT -->
+
+                <div class="form-group">
+
+                    <label for="statut_validation">
+                        Statut
+                    </label>
+
+                    <select
+                        id="statut_validation"
+                        name="statut_validation"
+                    >
+
+                        <option
+                            value="En attente"
+                            <?= $rapport['statut_validation'] === 'En attente'
+                                ? 'selected'
+                                : ''; ?>
+                        >
+                            En attente
+                        </option>
+
+
+                        <option
+                            value="Valide"
+                            <?= $rapport['statut_validation'] === 'Valide'
+                                ? 'selected'
+                                : ''; ?>
+                        >
+                            Validé
+                        </option>
+
+
+                        <option
+                            value="Refuse"
+                            <?= $rapport['statut_validation'] === 'Refuse'
+                                ? 'selected'
+                                : ''; ?>
+                        >
+                            Refusé
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- STAGE -->
+
+                <div class="form-group">
+
+                    <label for="id_stage">
+                        Stage
+                    </label>
+
+                    <select
+                        id="id_stage"
+                        name="id_stage"
+                        required
+                    >
+
+                        <?php foreach ($stages as $stage): ?>
+
+                            <option
+                                value="<?= $stage['id_stage']; ?>"
+                                <?= $stage['id_stage'] == $rapport['id_stage']
+                                    ? 'selected'
+                                    : ''; ?>
+                            >
+
+                                Stage <?= $stage['id_stage']; ?>
+
+                                -
+
+                                <?= htmlspecialchars(
+                                    $stage['nom_etudiant']
+                                    . ' '
+                                    . $stage['prenom_etudiant']
+                                ); ?>
+
+                                -
+
+                                <?= htmlspecialchars(
+                                    $stage['nom_entreprise']
+                                ); ?>
+
+                            </option>
+
+                        <?php endforeach; ?>
+
+                    </select>
+
+                </div>
+
+
+                <!-- BOUTONS -->
+
+                <div class="form-actions">
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary"
+                    >
+                        Modifier
+                    </button>
+
+
+                    <a
+                        href="index.php?page=rapport/index"
+                        class="btn btn-secondary"
+                    >
+                        Retour
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<?php require_once __DIR__ . '/../layouts/footer.php'; ?>

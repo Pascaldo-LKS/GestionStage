@@ -11,5 +11,11 @@
 
             <button type="submit">Enregistrer</button>
         </form>
+        <?php
+
+require_once __DIR__ . '/../layouts/footer.php';
+
+?>
+
     </body>
 </html>

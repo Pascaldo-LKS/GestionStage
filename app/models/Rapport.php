@@ -2,19 +2,52 @@
 
 require_once __DIR__ . '/../core/Model.php';
 
-
 class Rapport extends Model
 {
+    /*
+    |--------------------------------------------------------------------------
+    | Liste des rapports
+    |--------------------------------------------------------------------------
+    */
 
     public function getAll()
     {
-        $sql = "SELECT * FROM rapport";
+        $sql = "SELECT
+                    rapport.id_rapport,
+                    rapport.fichier,
+                    rapport.date_depot,
+                    rapport.statut_validation,
+                    rapport.id_stage,
+
+                    etudiant.nom AS nom_etudiant,
+                    etudiant.prenom AS prenom_etudiant,
+
+                    entreprise.nom_entreprise
+
+                FROM rapport
+
+                LEFT JOIN stage
+                    ON rapport.id_stage = stage.id_stage
+
+                LEFT JOIN etudiant
+                    ON stage.id_etudiant = etudiant.id_etudiant
+
+                LEFT JOIN entreprise
+                    ON stage.id_entreprise = entreprise.id_entreprise
+
+                ORDER BY rapport.id_rapport DESC";
 
         $stmt = $this->conn->query($sql);
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | Ajouter un rapport
+    |--------------------------------------------------------------------------
+    */
 
     public function create(
         $fichier,
@@ -43,9 +76,16 @@ class Rapport extends Model
     }
 
 
+    /*
+    |--------------------------------------------------------------------------
+    | Récupérer un rapport par son ID
+    |--------------------------------------------------------------------------
+    */
+
     public function getById($id)
     {
-        $sql = "SELECT * FROM rapport
+        $sql = "SELECT *
+                FROM rapport
                 WHERE id_rapport = ?";
 
         $stmt = $this->conn->prepare($sql);
@@ -55,6 +95,12 @@ class Rapport extends Model
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | Modifier un rapport
+    |--------------------------------------------------------------------------
+    */
 
     public function update(
         $id,
@@ -69,6 +115,7 @@ class Rapport extends Model
                     date_depot = ?,
                     statut_validation = ?,
                     id_stage = ?
+
                 WHERE id_rapport = ?";
 
         $stmt = $this->conn->prepare($sql);
@@ -83,6 +130,12 @@ class Rapport extends Model
     }
 
 
+    /*
+    |--------------------------------------------------------------------------
+    | Supprimer un rapport
+    |--------------------------------------------------------------------------
+    */
+
     public function delete($id)
     {
         $sql = "DELETE FROM rapport
@@ -93,18 +146,25 @@ class Rapport extends Model
         return $stmt->execute([$id]);
     }
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | Modifier uniquement le statut
+    |--------------------------------------------------------------------------
+    */
+
     public function updateStatut($id, $statut)
-{
-    $sql = "UPDATE rapport
-            SET statut_validation = ?
-            WHERE id_rapport = ?";
+    {
+        $sql = "UPDATE rapport
+                SET statut_validation = ?
 
-    $stmt = $this->conn->prepare($sql);
+                WHERE id_rapport = ?";
 
-    return $stmt->execute([
-        $statut,
-        $id
-    ]);
-}
+        $stmt = $this->conn->prepare($sql);
 
+        return $stmt->execute([
+            $statut,
+            $id
+        ]);
+    }
 }

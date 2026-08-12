@@ -497,7 +497,68 @@ class Router
                     $controller->dashboard();
 
                     break;
-                    
+
+                case 'evaluation/index':
+
+                    $controller = $this->chargerController("EvaluationController");
+
+                    $controller->index();
+
+                    break;
+
+
+                case 'evaluation/create':
+
+                    $controller = $this->chargerController("EvaluationController");
+
+                    $controller->create();
+
+                    break;
+
+
+                case 'evaluation/store':
+
+                    $controller = $this->chargerController("EvaluationController");
+
+                    $controller->store();
+
+                    break;
+
+
+                case 'evaluation/edit':
+
+                    $controller = $this->chargerController("EvaluationController");
+
+                    $controller->edit();
+
+                    break;
+
+
+                case 'evaluation/update':
+
+                    $controller = $this->chargerController("EvaluationController");
+
+                    $controller->update();
+
+                    break;
+
+
+                case 'evaluation/delete':
+
+                    $controller = $this->chargerController("EvaluationController");
+
+                    $controller->delete();
+
+                    break;
+
+                case 'dashboard/index':
+
+                    $controller = $this->chargerController("DashboardController");
+
+                    $controller->index();
+
+                    break;
+                                    
 
 
                 // PAGE INEXISTANTE
