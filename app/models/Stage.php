@@ -52,11 +52,21 @@ class Stage extends Model
         ]);
     }
 
-    public function getStageEnCours($id_etudiant)
+public function getStageEnCours($id_etudiant)
 {
-    $sql = "SELECT * FROM stage
-            WHERE id_etudiant = ?
-            AND statut = 'En cours'
+    $sql = "SELECT
+                stage.*,
+                entreprise.nom_entreprise
+
+            FROM stage
+
+            INNER JOIN entreprise
+                ON stage.id_entreprise = entreprise.id_entreprise
+
+            WHERE stage.id_etudiant = ?
+
+            AND stage.statut = 'En cours'
+
             LIMIT 1";
 
     $stmt = $this->conn->prepare($sql);

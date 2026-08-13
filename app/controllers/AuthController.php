@@ -54,11 +54,9 @@ class AuthController
                     $utilisateur['id_etudiant'];
 
 
-                header(
-                    "Location: index.php?page=stage/create"
-                );
-
+                header("Location: index.php?page=dashboard/etudiant");
                 exit;
+                
             }
 
 

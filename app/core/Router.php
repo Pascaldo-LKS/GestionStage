@@ -558,7 +558,14 @@ class Router
                     $controller->index();
 
                     break;
-                                    
+
+                case 'dashboard/etudiant':
+
+    $controller = $this->chargerController("DashboardEtudiantController");
+
+    $controller->index();
+
+    break;                                    
 
 
                 // PAGE INEXISTANTE

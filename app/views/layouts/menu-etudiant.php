@@ -9,7 +9,7 @@ requireEtudiant();
 <aside class="sidebar" id="sidebar">
 
     <div class="sidebar-title">
-        Espace étudiant
+        🎓 Espace étudiant
     </div>
 
 
@@ -33,7 +33,7 @@ requireEtudiant();
         </a>
 
 
-        <a href="index.php?page=rapport/index">
+        <a href="index.php?page=rapport/mes-rapports">
             📄
             <span>Mes rapports</span>
         </a>

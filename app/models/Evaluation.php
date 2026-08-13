@@ -1,15 +1,15 @@
 <?php
 
-require_once __DIR__ . '/../core/Database.php';
+require_once __DIR__ . '/../core/Model.php';
 
-class Evaluation
+class Evaluation  extends  Model
 {
-    private $db;
+    public $conn;
 
     public function __construct()
     {
         $database = new Database();
-        $this->db = $database->getConnection();
+        $this->conn = $database->getConnection();
     }
 
     public function getAll()
@@ -44,7 +44,7 @@ class Evaluation
             ORDER BY e.id_evaluation DESC
         ";
 
-        $stmt = $this->db->prepare($sql);
+        $stmt = $this->conn->prepare($sql);
         $stmt->execute();
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -65,7 +65,7 @@ class Evaluation
             WHERE id_evaluation = ?
         ";
 
-        $stmt = $this->db->prepare($sql);
+        $stmt = $this->conn->prepare($sql);
         $stmt->execute([$id]);
 
         return $stmt->fetch(PDO::FETCH_ASSOC);
@@ -91,7 +91,7 @@ class Evaluation
             VALUES (?, ?, ?, ?)
         ";
 
-        $stmt = $this->db->prepare($sql);
+        $stmt = $this->conn->prepare($sql);
 
         return $stmt->execute([
             $note,
@@ -125,7 +125,7 @@ class Evaluation
             WHERE id_evaluation = ?
         ";
 
-        $stmt = $this->db->prepare($sql);
+        $stmt = $this->conn->prepare($sql);
 
         return $stmt->execute([
             $note,
@@ -150,8 +150,32 @@ class Evaluation
             WHERE id_evaluation = ?
         ";
 
-        $stmt = $this->db->prepare($sql);
+        $stmt = $this->conn->prepare($sql);
 
         return $stmt->execute([$id]);
     }
+
+    public function getByEtudiant($id_etudiant)
+{
+    $sql = "SELECT
+                evaluation.*,
+                stage.id_stage,
+                stage.date_debut,
+                stage.date_fin
+
+            FROM evaluation
+
+            INNER JOIN stage
+                ON evaluation.id_stage = stage.id_stage
+
+            WHERE stage.id_etudiant = ?
+
+            ORDER BY evaluation.id_evaluation DESC";
+
+    $stmt = $this->conn->prepare($sql);
+
+    $stmt->execute([$id_etudiant]);
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
 }

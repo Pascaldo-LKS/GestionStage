@@ -4,18 +4,15 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-
 /*
 |--------------------------------------------------------------------------
 | Vérifier si l'utilisateur est connecté
 |--------------------------------------------------------------------------
 */
-
 function estConnecte()
 {
     return isset($_SESSION['id_utilisateur']);
 }
-
 
 /*
 |--------------------------------------------------------------------------

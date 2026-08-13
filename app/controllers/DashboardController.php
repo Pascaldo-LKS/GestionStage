@@ -8,14 +8,20 @@ require_once __DIR__ . '/../models/Rapport.php';
 require_once __DIR__ . '/../models/Evaluation.php';
 require_once __DIR__ . '/../models/Utilisateur.php';
 
-//require_once __DIR__ . '/../../config/auth.php';
+require_once __DIR__ . '/../config/auth.php';
 
 
 class DashboardController
 {
+    /*
+    |--------------------------------------------------------------------------
+    | TABLEAU DE BORD ADMINISTRATEUR
+    |--------------------------------------------------------------------------
+    */
+
     public function index()
     {
-      //  requireAdmin();
+        requireAdmin();
 
         $etudiantModel = new Etudiant();
         $entrepriseModel = new Entreprise();
@@ -45,5 +51,69 @@ class DashboardController
 
 
         require_once __DIR__ . '/../views/dashboard/index.php';
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | TABLEAU DE BORD ÉTUDIANT
+    |--------------------------------------------------------------------------
+    */
+
+    public function etudiant()
+    {
+        requireEtudiant();
+
+
+        $id_etudiant = $_SESSION['id_etudiant'];
+
+
+        $stageModel = new Stage();
+        $rapportModel = new Rapport();
+        $evaluationModel = new Evaluation();
+
+
+        /*
+        |----------------------------------------------------------------------
+        | Récupérer le stage de l'étudiant
+        |----------------------------------------------------------------------
+        */
+
+        $stage = $stageModel->getStageEnCours($id_etudiant);
+
+
+        /*
+        |----------------------------------------------------------------------
+        | Récupérer le rapport de son stage
+        |----------------------------------------------------------------------
+        */
+
+        $rapport = null;
+
+        if ($stage) {
+
+            $rapport = $rapportModel->getByStage(
+                $stage['id_stage']
+            );
+        }
+
+
+        /*
+        |----------------------------------------------------------------------
+        | Récupérer l'évaluation
+        |----------------------------------------------------------------------
+        */
+
+        $evaluation = null;
+
+        if ($stage) {
+
+            $evaluation = $evaluationModel->getByStage(
+                $stage['id_stage']
+            );
+        }
+
+
+        require_once __DIR__ . '/../views/dashboard/etudiant.php';
     }
 }

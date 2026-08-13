@@ -167,4 +167,65 @@ class Rapport extends Model
             $id
         ]);
     }
+
+    public function getByStage($id_stage)
+{
+    $sql = "SELECT
+                rapport.*,
+
+                etudiant.nom AS nom_etudiant,
+                etudiant.prenom AS prenom_etudiant,
+
+                entreprise.nom_entreprise
+
+            FROM rapport
+
+            LEFT JOIN stage
+                ON rapport.id_stage = stage.id_stage
+
+            LEFT JOIN etudiant
+                ON stage.id_etudiant = etudiant.id_etudiant
+
+            LEFT JOIN entreprise
+                ON stage.id_entreprise = entreprise.id_entreprise
+
+            WHERE rapport.id_stage = ?
+
+            LIMIT 1";
+
+
+    $stmt = $this->conn->prepare($sql);
+
+    $stmt->execute([$id_stage]);
+
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
+public function getByEtudiant($id_etudiant)
+{
+    $sql = "SELECT
+                rapport.*,
+                stage.date_debut,
+                stage.date_fin,
+                stage.statut,
+                entreprise.nom_entreprise
+
+            FROM rapport
+
+            INNER JOIN stage
+                ON rapport.id_stage = stage.id_stage
+
+            INNER JOIN entreprise
+                ON stage.id_entreprise = entreprise.id_entreprise
+
+            WHERE stage.id_etudiant = ?
+
+            ORDER BY rapport.id_rapport DESC";
+
+    $stmt = $this->conn->prepare($sql);
+
+    $stmt->execute([$id_etudiant]);
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
 }
