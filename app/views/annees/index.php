@@ -35,13 +35,12 @@ require_once __DIR__ . '/../layouts/menu-admin.php';
             <div class="table-container">
                 <table  class="data-table">
                     <tr>
-                        <th>ID</th>
+                        
                         <th>Année</th>
                         <th>Action</tr>
                     </tr>
                     <?php foreach($annees as $annee): ?>
                     <tr>
-                        <td> <?= $annee['id_annee']; ?> </td>
                         
                         <td> <?= $annee['libelle']; ?> </td>
 

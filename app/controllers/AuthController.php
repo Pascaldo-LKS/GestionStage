@@ -55,7 +55,7 @@ class AuthController
 
 
                 header(
-                    "Location: index.php?page=stage/index"
+                    "Location: index.php?page=stage/create"
                 );
 
                 exit;

@@ -4,13 +4,9 @@ $title = "Ajouter une filière";
 
 require_once __DIR__ . '/../layouts/header.php';
 
-require_once __DIR__ . '/../layouts/menu-admin.php';
-
-?>
+require_once __DIR__ . '/../layouts/menu-admin.php'; ?>
 
 <div class="page-content">
-
-```
 <div class="page-header">
 
     <div>
@@ -23,23 +19,16 @@ require_once __DIR__ . '/../layouts/menu-admin.php';
 
     </div>
 
-
-    <a
-        href="index.php?page=filiere/index"
-        class="btn btn-secondary"
-    >
-        ← Retour
-    </a>
+    <a  href="index.php?page=filiere/index" class="btn btn-secondary" >
+        ← Retour </a>
 
 </div>
-
 
 <div class="form-card">
 
     <form
         method="POST"
-        action="index.php?page=filiere/store"
-    >
+        action="index.php?page=filiere/store"  >
 
         <div class="form-group">
 

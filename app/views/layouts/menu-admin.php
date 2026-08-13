@@ -1,21 +1,15 @@
 <?php
 require_once __DIR__ . '/../../config/auth.php';
-
 requireAdmin();
 
 /** @var array $user */
 ?>
-
 <nav class="admin-navbar">
-
     <div class="navbar-container">
-
-        <!-- LOGO / NOM -->
+       <!-- LOGO / NOM -->
         <div class="navbar-brand">
 
-            <a >
-                GestionStage
-            </a>
+            <a >  GestionStage </a>
             <br><br>
             <?php if ($user): ?>
 
@@ -26,21 +20,13 @@ requireAdmin();
         <?php endif; ?>
 
         </div>
-
-
         <!-- BOUTON MENU MOBILE -->
-
         <button
             class="menu-toggle"
             id="menuToggle"
             type="button"
-            aria-label="Ouvrir le menu"
-        >
-            ☰
+            aria-label="Ouvrir le menu">           
         </button>
-
-
-        <!-- MENU -->
 
         <div class="navbar-menu" id="navbarMenu">
 

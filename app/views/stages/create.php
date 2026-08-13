@@ -1,92 +1,212 @@
-<!DOCTYPE html>
-<html>
+<?php
 
-<head>
-    <title>Ajouter un stage</title>
-</head>
-<?php  /** @var array $etudiants */
-/** @var array $entreprises */ ?>
-<body>
+$title = "Ajouter un stage";
 
-<h1>Ajouter un stage</h1>
+require_once __DIR__ . '/../layouts/header.php';
 
-<form method="POST" action="index.php?page=stage/store">
+require_once __DIR__ . '/../layouts/menu-admin.php';
 
-    <label>Date de début :</label>
+/** @var array $etudiants */
+/** @var array $entreprises */
 
-    <input type="date" name="date_debut" required>
+?>
 
-    <br><br>
-    <label>Date de fin :</label>
+<main class="main-content">
 
-    <input type="date" name="date_fin" required>
+    <div class="page-content">
 
-    <br><br>
+        <div class="page-header">
 
-    <label>Statut :</label>
+            <h1>Ajouter un stage</h1>
 
-    <select name="statut">
-        <option>Prévue </option>
-        <option value="En cours"> En cours </option>
-        <option value="Termine">  Terminé </option>
-
-    </select>
-
-    <br><br>
-    <label>Étudiant :</label>
-
-    <select name="id_etudiant" required>
-
-        <option value="">
-            -- Choisir un étudiant --
-        </option>
-
-        <?php foreach($etudiants as $etudiant): ?>
-
-            <option value="<?= $etudiant['id_etudiant']; ?>">
-
-                <?= $etudiant['nom'] . ' ' . $etudiant['prenom']; ?>
-
-            </option>
-
-        <?php endforeach; ?>
-
-    </select>
-
-    <br><br>
+        </div>
 
 
-    <label>Entreprise :</label>
+        <div class="form-card">
 
-    <select name="id_entreprise" required>
+            <form
+                method="POST"
+                action="index.php?page=stage/store"
+            >
 
-        <option value="">
-            -- Choisir une entreprise --
-        </option>
 
-        <?php foreach($entreprises as $entreprise): ?>
+                <!-- DATE DE DÉBUT -->
 
-            <option value="<?= $entreprise['id_entreprise']; ?>">
+                <div class="form-group">
 
-                <?= $entreprise['nom_entreprise']; ?>
+                    <label for="date_debut">
+                        Date de début :
+                    </label>
 
-            </option>
+                    <input
+                        type="date"
+                        id="date_debut"
+                        name="date_debut"
+                        required
+                    >
 
-        <?php endforeach; ?>
-    </select>
-    <br><br>
-    <button type="submit">
-        Enregistrer
-    </button>
+                </div>
 
-</form>
 
-<br>
+                <!-- DATE DE FIN -->
 
-<a href="index.php?page=stage/index">
-    Retour à la liste
-</a>
+                <div class="form-group">
 
-</body>
+                    <label for="date_fin">
+                        Date de fin :
+                    </label>
 
-</html>
+                    <input
+                        type="date"
+                        id="date_fin"
+                        name="date_fin"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- STATUT -->
+
+                <div class="form-group">
+
+                    <label for="statut">
+                        Statut :
+                    </label>
+
+                    <select
+                        id="statut"
+                        name="statut"
+                        required
+                    >
+
+                        <option value="">
+                            -- Choisir un statut --
+                        </option>
+
+                        <option value="En cours">
+                            En cours
+                        </option>
+
+                        <option value="Termine">
+                            Terminé
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- ÉTUDIANT -->
+
+                <div class="form-group">
+
+                    <label for="id_etudiant">
+                        Étudiant :
+                    </label>
+
+                    <select
+                        id="id_etudiant"
+                        name="id_etudiant"
+                        required
+                    >
+
+                        <option value="">
+                            -- Choisir un étudiant --
+                        </option>
+
+
+                        <?php foreach ($etudiants as $etudiant): ?>
+
+                            <option
+                                value="<?= $etudiant['id_etudiant']; ?>"
+                            >
+
+                                <?= htmlspecialchars(
+                                    $etudiant['nom'] . ' ' .
+                                    $etudiant['prenom']
+                                ); ?>
+
+                            </option>
+
+                        <?php endforeach; ?>
+
+                    </select>
+
+                </div>
+
+
+                <!-- ENTREPRISE -->
+
+                <div class="form-group">
+
+                    <label for="id_entreprise">
+                        Entreprise :
+                    </label>
+
+                    <select
+                        id="id_entreprise"
+                        name="id_entreprise"
+                        required
+                    >
+
+                        <option value="">
+                            -- Choisir une entreprise --
+                        </option>
+
+
+                        <?php foreach ($entreprises as $entreprise): ?>
+
+                            <option
+                                value="<?= $entreprise['id_entreprise']; ?>"
+                            >
+
+                                <?= htmlspecialchars(
+                                    $entreprise['nom_entreprise']
+                                ); ?>
+
+                            </option>
+
+                        <?php endforeach; ?>
+
+                    </select>
+
+                </div>
+
+
+                <!-- BOUTONS -->
+
+                <div class="form-actions">
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary"
+                    >
+                        Enregistrer
+                    </button>
+
+
+                    <a
+                        href="index.php?page=stage/index"
+                        class="btn btn-secondary"
+                    >
+                        Retour
+                    </a>
+
+                </div>
+
+
+            </form>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<?php
+
+require_once __DIR__ . '/../layouts/footer.php';
+
+?>

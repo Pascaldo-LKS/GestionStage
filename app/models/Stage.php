@@ -2,10 +2,8 @@
 
 require_once __DIR__ . '/../core/Model.php';
 
-
 class Stage extends Model
 {
-
     public function getAll()
 {
     $sql = "SELECT

@@ -1,38 +1,100 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Liste des niveaux</title>
-</head>
 <?php
+
+$title = "Liste des niveaux";
+
+require_once __DIR__ . '/../layouts/header.php';
+
+require_once __DIR__ . '/../layouts/menu-admin.php';
+
 /** @var array $niveaux */
+
 ?>
-<body>
-<h1>Liste des niveau</h1>
 
-<a href="index.php?page=niveau/create">
-    Ajouter un Niveau
-</a><br><br>
+<main >
 
-<table border="1">
-    <tr>
-        <th>ID</th>
-        <th>Nom Niveau</th>
-        <th>Action</th>
-    </tr>
-    <?php foreach($niveaux as $niveau): ?>
-    <tr>
-        <td>
-            <?= $niveau['id_niveau']; ?>
-        </td>
-        <td>
-            <?= $niveau['nom_niveau']; ?>
-        </td>
-        <td><a href="index.php?page=niveau/edit&id=<?= $niveau['id_niveau']; ?>"> Modifier </a>
-            <a href="index.php?page=niveau/delete&id=<?= $niveau['id_niveau']; ?>"
-             onclick="return confirm('Voulez-vous supprimer ce niveau ?');"> Supprimer </a></td>
-   </tr>
-    <?php endforeach; ?>
-</table>
+    <div class="page-content">
 
-</body>
-</html>
+        <div class="page-header">
+
+            <h1>Liste des niveaux</h1>
+
+            <a
+                href="index.php?page=niveau/create"
+                class="btn btn-primary"
+            >
+                Ajouter un niveau
+            </a>
+
+        </div>
+
+
+        <div class="table-card">
+
+            <div class="table-responsive">
+
+                <table class="data-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Nom du niveau</th>
+
+                            <th>Actions</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                    <?php foreach ($niveaux as $niveau): ?>
+
+                        <tr>
+
+                            
+                            <td>
+                                <?= htmlspecialchars($niveau['nom_niveau']); ?>
+                            </td>
+
+                            <td class="actions">
+
+                                <a
+                                    href="index.php?page=niveau/edit&id=<?= $niveau['id_niveau']; ?>"
+                                    class="btn btn-edit"
+                                >
+                                    Modifier
+                                </a>
+
+                                <a
+                                    href="index.php?page=niveau/delete&id=<?= $niveau['id_niveau']; ?>"
+                                    class="btn btn-delete"
+                                    onclick="return confirm('Voulez-vous supprimer ce niveau ?');"
+                                >
+                                    Supprimer
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+                    <?php endforeach; ?>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
+<?php
+
+require_once __DIR__ . '/../layouts/footer.php';
+
+?>

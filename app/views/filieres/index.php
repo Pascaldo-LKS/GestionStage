@@ -40,9 +40,6 @@ require_once __DIR__ . '/../layouts/menu-admin.php';
         <thead>
 
             <tr>
-
-                <th>ID</th>
-
                 <th>Nom de la filière</th>
 
                 <th>Actions</th>
@@ -57,12 +54,6 @@ require_once __DIR__ . '/../layouts/menu-admin.php';
             <?php foreach($filieres as $filiere): ?>
 
             <tr>
-
-                <td>
-                    <?= $filiere['id_filiere']; ?>
-                </td>
-
-
                 <td>
                     <?= htmlspecialchars(
                         $filiere['nom_filiere']
